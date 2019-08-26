@@ -1,0 +1,25 @@
+{
+  "name": "luxon-business-days",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amaidah/luxon-business-days.git"
+  },
+  "author": "Andrew Maidah <a.maidah@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amaidah/luxon-business-days/issues"
+  },
+  "homepage": "https://github.com/amaidah/luxon-business-days#readme",
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.7"
+  }
+}
