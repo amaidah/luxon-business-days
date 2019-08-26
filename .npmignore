@@ -1,3 +1,7 @@
 node_modules
 src
+.eslintrc.json
+.gitignore
+.prettierrc
+package-lock.json
 webpack.config.js
