@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "lint": "eslint src",
+    "test": "jest",
     "clean": "rimraf dist",
     "build": "webpack",
     "prepare": "npm run clean && npm run lint && npm run build"
@@ -27,6 +28,7 @@
     "eslint-config-prettier": "^6.1.0",
     "eslint-plugin-prettier": "^3.1.0",
     "husky": "^3.0.4",
+    "jest": "^24.9.0",
     "lint-staged": "^9.2.4",
     "prettier": "^1.18.2",
     "rimraf": "^3.0.0",
@@ -35,7 +37,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged && npm run test"
     }
   },
   "lint-staged": {
