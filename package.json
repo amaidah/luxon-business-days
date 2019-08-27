@@ -2,7 +2,7 @@
   "name": "luxon-business-days",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "lint": "eslint src",
     "clean": "rimraf dist",
