@@ -1,5 +1,3 @@
-import helloWorld from './index';
-
-it('prints "Hello World"', () => {
-  expect(helloWorld()).toEqual('Hello World');
+it('boilerplate', () => {
+  expect(1).toBe(1);
 });

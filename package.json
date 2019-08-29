@@ -1,7 +1,7 @@
 {
   "name": "luxon-business-days",
   "version": "1.2.0",
-  "description": "",
+  "description": "Luxon plugin to",
   "main": "dist/index.js",
   "scripts": {
     "lint": "eslint src",
@@ -20,6 +20,9 @@
     "url": "https://github.com/amaidah/luxon-business-days/issues"
   },
   "homepage": "https://github.com/amaidah/luxon-business-days#readme",
+  "peerDependencies": {
+    "luxon": "1.17.x"
+  },
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
@@ -30,6 +33,7 @@
     "husky": "^3.0.4",
     "jest": "^24.9.0",
     "lint-staged": "^9.2.4",
+    "luxon": "^1.17.2",
     "prettier": "^1.18.2",
     "rimraf": "^3.0.0",
     "webpack": "^4.39.2",
