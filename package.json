@@ -39,7 +39,8 @@
     "prettier": "^1.18.2",
     "rimraf": "^3.0.0",
     "webpack": "^4.39.2",
-    "webpack-cli": "^3.3.7"
+    "webpack-cli": "^3.3.7",
+    "webpack-node-externals": "^1.7.2"
   },
   "husky": {
     "hooks": {
