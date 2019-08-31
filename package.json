@@ -1,7 +1,7 @@
 {
   "name": "luxon-business-days",
   "version": "1.2.0",
-  "description": "Luxon plugin to",
+  "description": "Luxon plugin to manipulate time through business days",
   "main": "dist/index.js",
   "scripts": {
     "lint": "eslint src",

@@ -11,6 +11,9 @@ DateTime.prototype.setupBusiness = function({
    * config access across new instances we add our config
    * to the chain as a workaround
    * https://github.com/moment/luxon/blob/master/src/datetime.js#L62
+   *
+   * The limitation to this is that this plugin can only support one
+   * business setup at a time currently
    */
   DateTime.prototype.businessDays = businessDays;
   DateTime.prototype.holidays = holidays;
