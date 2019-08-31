@@ -1,8 +1,6 @@
-import { DEFAULT_BUSINESS_DAYS, DEFAULT_HOLIDAYS } from './defaults';
+import { DateTime } from 'luxon';
 
-// if (typeof require === 'function') {
-var { DateTime } = require('luxon');
-// }
+import { DEFAULT_BUSINESS_DAYS, DEFAULT_HOLIDAYS } from './defaults';
 
 DateTime.prototype.setupBusiness = function({
   businessDays = DEFAULT_BUSINESS_DAYS,
@@ -24,8 +22,4 @@ DateTime.prototype.isBusinessDay = function() {
   return defaultBusinessDays.includes(this.weekday);
 };
 
-if (typeof module != 'undefined' && module.exports) {
-  module.exports = { DateTime };
-}
-
-// export { DateTime };
+export { DateTime };
