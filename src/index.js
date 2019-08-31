@@ -8,17 +8,24 @@ DateTime.prototype.setupBusiness = function({
   businessDays = DEFAULT_BUSINESS_DAYS,
   holidays = DEFAULT_HOLIDAYS,
 } = {}) {
-  // luxon is immutable so we add our config to the chain
-  // so we can maintain access across new instances
+  /**
+   * luxon does not clone custom properties so to maintain
+   * config access across new instances we add our config
+   * to the chain as a workaround
+   * https://github.com/moment/luxon/blob/master/src/datetime.js#L62
+   */
   DateTime.prototype.businessDays = businessDays;
   DateTime.prototype.holidays = holidays;
 };
 
 DateTime.prototype.isBusinessDay = function() {
-  console.log('this.businessDays', this.businessDays);
   const defaultBusinessDays = this.businessDays || DEFAULT_BUSINESS_DAYS;
 
   return defaultBusinessDays.includes(this.weekday);
 };
 
-export { DateTime };
+if (typeof module != 'undefined' && module.exports) {
+  module.exports = { DateTime };
+}
+
+// export { DateTime };
