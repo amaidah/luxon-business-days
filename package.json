@@ -6,6 +6,8 @@
   "scripts": {
     "lint": "eslint src",
     "test": "jest",
+    "test:watch": "NODE_ENV=test jest --watch --coverage=false",
+    "test:coverage": "NODE_ENV=test jest --watch",
     "clean": "rimraf dist",
     "build": "webpack",
     "prepare": "npm run clean && npm run lint && npm run build"
