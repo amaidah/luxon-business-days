@@ -1,4 +1,4 @@
-import { DateTime } from './index';
+import { DateTime, clone } from './index';
 import { DEFAULT_BUSINESS_DAYS, DEFAULT_HOLIDAYS } from './defaults';
 
 beforeEach(() => {
@@ -79,6 +79,33 @@ describe('isBusinessDay()', () => {
 
       dt = dt.plus({ days: 1 });
     });
+  });
+});
+
+describe('plusBusiness()', () => {
+  it('returns a cloned instance if invalid', () => {
+    const invalid = DateTime.fromObject({ months: 13 });
+    const nextDay = invalid.plusBusiness();
+    nextDay.c = 'should not equal invalid.c by reference';
+
+    expect(nextDay.isValid).toBeFalsy();
+    expect(nextDay).toBeInstanceOf(DateTime);
+    expect(nextDay.c).not.toEqual(invalid.c);
+  });
+});
+
+describe('clone()', () => {
+  it('can clone a DateTime instance', () => {
+    const dt = DateTime.fromObject({ year: 2019 });
+    const copy = clone(dt);
+
+    expect(dt.toString()).toEqual(copy.toString());
+
+    copy.c.year = 2006;
+
+    expect(dt.year).not.toEqual(copy.year);
+    expect(dt.year).toEqual(2019);
+    expect(copy.year).toEqual(2006);
   });
 });
 

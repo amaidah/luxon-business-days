@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 
-import { DEFAULT_BUSINESS_DAYS, DEFAULT_HOLIDAYS } from './defaults';
+import { DEFAULT_BUSINESS_DAYS, DEFAULT_HOLIDAYS, ONE_DAY } from './defaults';
 
 DateTime.prototype.setupBusiness = function({
   businessDays = DEFAULT_BUSINESS_DAYS,
@@ -25,4 +25,15 @@ DateTime.prototype.isBusinessDay = function() {
   return defaultBusinessDays.includes(this.weekday);
 };
 
-export { DateTime };
+DateTime.prototype.plusBusiness = function({ days = ONE_DAY } = {}) {
+  const dt = clone(this);
+  if (!dt.isValid) {
+    return dt;
+  }
+};
+
+function clone(inst) {
+  return new DateTime(Object.assign({}, inst));
+}
+
+export { DateTime, clone };
