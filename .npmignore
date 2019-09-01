@@ -6,3 +6,5 @@ src
 .prettierrc
 package-lock.json
 webpack.config.js
+.circleci
+coverage
