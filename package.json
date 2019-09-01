@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "lint": "eslint src",
-    "test": "jest",
+    "test": "jest --collect-coverage",
     "test:watch": "NODE_ENV=test jest --watch --coverage=false",
     "test:coverage": "NODE_ENV=test jest --collect-coverage",
     "test:ci": "jest --collect-coverage",
