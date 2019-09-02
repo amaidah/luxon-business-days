@@ -19,17 +19,34 @@ DateTime.prototype.setupBusiness = function({
   DateTime.prototype.holidays = holidays;
 };
 
-DateTime.prototype.isBusinessDay = function() {
-  const defaultBusinessDays = this.businessDays || DEFAULT_BUSINESS_DAYS;
+DateTime.prototype.clearBusinessSetup = function() {
+  delete DateTime.prototype.businessDays;
+  delete DateTime.prototype.holidays;
+};
 
-  return defaultBusinessDays.includes(this.weekday);
+DateTime.prototype.isBusinessDay = function() {
+  const businessDays = this.businessDays || DEFAULT_BUSINESS_DAYS;
+
+  return businessDays.includes(this.weekday);
 };
 
 DateTime.prototype.plusBusiness = function({ days = ONE_DAY } = {}) {
-  const dt = clone(this);
+  let dt = clone(this);
   if (!dt.isValid) {
     return dt;
   }
+
+  let businessDaysLeftToAdd = Math.round(days);
+
+  while (businessDaysLeftToAdd > 0) {
+    dt = dt.plus({ days: ONE_DAY });
+
+    if (dt.isBusinessDay()) {
+      businessDaysLeftToAdd--;
+    }
+  }
+
+  return dt;
 };
 
 function clone(inst) {

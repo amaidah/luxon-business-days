@@ -2,7 +2,7 @@ import { DateTime, clone } from './index';
 import { DEFAULT_BUSINESS_DAYS, DEFAULT_HOLIDAYS } from './defaults';
 
 beforeEach(() => {
-  resetGlobalDateTimeBusinessSetup();
+  DateTime.prototype.clearBusinessSetup();
 });
 
 describe('setupBusiness()', () => {
@@ -43,7 +43,7 @@ describe('setupBusiness()', () => {
 });
 
 describe('isBusinessDay()', () => {
-  it('knows mon-fri are the default business days', () => {
+  it('knows mon-fri are the default business days if there was no custom business setup', () => {
     const days = {
       monday: { dt: DateTime.local(2019, 8, 26), isBusinessDay: true },
       tuesday: { dt: DateTime.local(2019, 8, 27), isBusinessDay: true },
@@ -92,14 +92,38 @@ describe('plusBusiness()', () => {
     expect(nextDay).toBeInstanceOf(DateTime);
     expect(nextDay.c).not.toEqual(invalid.c);
   });
+
+  it('knows how to add one business day by default if called with no arguments', () => {
+    const friday = DateTime.local(2019, 8, 23);
+    const monday = DateTime.local(2019, 8, 26);
+    const fridayPlusBusinessDay = friday.plusBusiness();
+
+    expect(+fridayPlusBusinessDay === +monday).toBe(true);
+  });
+
+  it('knows how to add basic business days to a DateTime instance', () => {
+    const monday = DateTime.local(2019, 8, 26);
+    const wednesday = DateTime.local(2019, 8, 28);
+    const mondayPlusBusinessDays = monday.plusBusiness({ days: 2 });
+
+    expect(+mondayPlusBusinessDays === +wednesday).toBe(true);
+  });
+
+  it('knows how to add business days through weekends', () => {
+    const thursday = DateTime.local(2019, 8, 22);
+    const nextTuesday = DateTime.local(2019, 8, 27);
+    const thursdayPlusBusinessDays = thursday.plusBusiness({ days: 3 });
+
+    expect(+thursdayPlusBusinessDays === +nextTuesday).toBe(true);
+  });
 });
 
 describe('clone()', () => {
-  it('can clone a DateTime instance', () => {
+  it('knows how to clone a DateTime instance', () => {
     const dt = DateTime.fromObject({ year: 2019 });
     const copy = clone(dt);
 
-    expect(dt.toString()).toEqual(copy.toString());
+    expect(+dt === +copy).toBe(true);
 
     copy.c.year = 2006;
 
@@ -108,8 +132,3 @@ describe('clone()', () => {
     expect(copy.year).toEqual(2006);
   });
 });
-
-function resetGlobalDateTimeBusinessSetup() {
-  const dt = DateTime.local();
-  dt.setupBusiness();
-}
