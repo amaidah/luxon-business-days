@@ -20,3 +20,28 @@ describe('isNewYearsDay()', () => {
     });
   });
 });
+
+describe('isMemorialDay()', () => {
+  it('early returns false if a date time instance is not in may', () => {
+    const dayInFeb = DateTime.fromObject({ month: 2, day: 3 });
+
+    expect(holidays.isMemorialDay(dayInFeb)).toEqual(false);
+  });
+
+  it('knows a Memorial Day of any year', () => {
+    const memorial2019 = DateTime.fromObject({ year: 2019, month: 5, day: 27 });
+    const memorial2017 = DateTime.fromObject({ year: 2017, month: 5, day: 29 });
+    const memorial1988 = DateTime.fromObject({ year: 1988, month: 5, day: 30 });
+    const memorial2020 = DateTime.fromObject({ year: 2020, month: 5, day: 25 });
+    const memorialDays = [
+      memorial2019,
+      memorial2017,
+      memorial1988,
+      memorial2020,
+    ];
+
+    memorialDays.forEach(day => {
+      expect(holidays.isMemorialDay(day)).toEqual(true);
+    });
+  });
+});
