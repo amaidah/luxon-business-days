@@ -24,6 +24,10 @@ DateTime.prototype.clearBusinessSetup = function() {
   delete DateTime.prototype.holidays;
 };
 
+DateTime.prototype.isHoliday = function() {
+  return false;
+};
+
 DateTime.prototype.isBusinessDay = function() {
   const businessDays = this.businessDays || DEFAULT_BUSINESS_DAYS;
 
