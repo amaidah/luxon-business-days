@@ -1,10 +1,28 @@
 import { DateTime } from 'luxon';
 
+import { getEasterMonthAndDay } from './helpers';
+
 export const isNewYearsDay = function(inst) {
   const matchesMonth = inst.month === 1;
   const matchesDay = inst.day === 1;
 
   return matchesMonth && matchesDay;
+};
+
+// first Sunday after the Full Moon date, that falls on or after March 21
+export const isEasterDay = function(inst) {
+  const instanceYear = inst.year;
+  const [
+    easterMonthForInstanceYear,
+    easterDayForInstanceYear,
+  ] = getEasterMonthAndDay(instanceYear);
+  const easterDay = DateTime.fromObject({
+    year: instanceYear,
+    month: easterMonthForInstanceYear,
+    day: easterDayForInstanceYear,
+  });
+
+  return +inst === +easterDay;
 };
 
 // last Monday of May
