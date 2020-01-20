@@ -46,3 +46,10 @@ export const isMemorialDay = function(inst) {
 
   return +inst === +memorialDay;
 };
+
+export const isIndependanceDay = function(inst) {
+  const matchesMonth = inst.month === 7;
+  const matchesDay = inst.day === 4;
+
+  return matchesMonth && matchesDay;
+};
