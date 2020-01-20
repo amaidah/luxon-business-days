@@ -2,7 +2,7 @@ import { DateTime } from './index';
 import * as holidays from './holidays';
 
 describe('isNewYearsDay()', () => {
-  it('knows if a date time instance is New Years Day', () => {
+  it('knows if a date time instance is not New Years Day', () => {
     const notNewYearsDay = DateTime.fromObject({ month: 4, day: 14 });
 
     expect(holidays.isNewYearsDay(notNewYearsDay)).toEqual(false);
@@ -65,6 +65,32 @@ describe('isEasterDay()', () => {
 
     easterDays.forEach(day => {
       expect(holidays.isEasterDay(day)).toEqual(true);
+    });
+  });
+
+  it('knows days that are not Easter Day', () => {
+    const notEasterDays = [
+      DateTime.fromObject({ year: 2019, month: 4, day: 22 }),
+      DateTime.fromObject({ year: 2016, month: 1, day: 16 }),
+      DateTime.fromObject({ year: 1988, month: 11, day: 23 }),
+      DateTime.fromObject({ year: 2020, month: 8, day: 2 }),
+    ];
+
+    notEasterDays.forEach(day => {
+      expect(holidays.isEasterDay(day)).toEqual(false);
+    });
+  });
+});
+
+describe('isIndependanceDay()', () => {
+  it('konws an Independance Day of any year', () => {
+    const independanceDays = [
+      DateTime.fromObject({ year: 1988, month: 7, day: 4 }),
+      DateTime.fromObject({ year: 2020, month: 7, day: 4 }),
+    ];
+
+    independanceDays.forEach(day => {
+      expect(holidays.isIndependanceDay(day)).toEqual(true);
     });
   });
 
