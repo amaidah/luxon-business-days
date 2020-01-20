@@ -94,16 +94,51 @@ describe('isIndependanceDay()', () => {
     });
   });
 
-  it('knows days that are not Easter Day', () => {
-    const notEasterDays = [
+  it('knows days that are not Independance Day', () => {
+    const notIndependanceDays = [
       DateTime.fromObject({ year: 2019, month: 4, day: 22 }),
       DateTime.fromObject({ year: 2016, month: 1, day: 16 }),
-      DateTime.fromObject({ year: 1988, month: 11, day: 23 }),
-      DateTime.fromObject({ year: 2020, month: 8, day: 2 }),
     ];
 
-    notEasterDays.forEach(day => {
-      expect(holidays.isEasterDay(day)).toEqual(false);
+    notIndependanceDays.forEach(day => {
+      expect(holidays.isIndependanceDay(day)).toEqual(false);
+    });
+  });
+});
+
+describe('isLaborDay()', () => {
+  it('early returns false if a date time instance is not in september', () => {
+    const dayInFeb = DateTime.fromObject({ month: 2, day: 3 });
+
+    expect(holidays.isLaborDay(dayInFeb)).toEqual(false);
+  });
+
+  it('knows a non september 1st Labor Day of any year', () => {
+    const labor2019 = DateTime.fromObject({ year: 2019, month: 9, day: 2 });
+    const labor2017 = DateTime.fromObject({ year: 2017, month: 9, day: 4 });
+    const labor1988 = DateTime.fromObject({ year: 1988, month: 9, day: 5 });
+    const labor2020 = DateTime.fromObject({ year: 2020, month: 9, day: 7 });
+    const laborDays = [labor2019, labor2017, labor1988, labor2020];
+
+    laborDays.forEach(day => {
+      expect(holidays.isLaborDay(day)).toEqual(true);
+    });
+  });
+
+  it('knows a september 1st Labor Day', () => {
+    const labor2025 = DateTime.fromObject({ year: 2025, month: 9, day: 1 });
+
+    expect(holidays.isLaborDay(labor2025)).toEqual(true);
+  });
+
+  it('knows days that are not Labor Day in september', () => {
+    const notLaborDays = [
+      DateTime.fromObject({ year: 2019, month: 9, day: 22 }),
+      DateTime.fromObject({ year: 2016, month: 9, day: 16 }),
+    ];
+
+    notLaborDays.forEach(day => {
+      expect(holidays.isLaborDay(day)).toEqual(false);
     });
   });
 });

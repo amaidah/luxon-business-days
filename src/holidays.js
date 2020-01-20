@@ -53,3 +53,27 @@ export const isIndependanceDay = function(inst) {
 
   return matchesMonth && matchesDay;
 };
+
+// first Monday in September
+export const isLaborDay = function(inst) {
+  const MONTH_OF_SEPTEMBER = 9;
+  const isMatchingMonth = inst.month === MONTH_OF_SEPTEMBER;
+
+  if (!isMatchingMonth) {
+    return false;
+  }
+
+  const instanceYear = inst.year;
+  const firstDayInSeptember = DateTime.fromObject({
+    year: instanceYear,
+    month: MONTH_OF_SEPTEMBER,
+    day: 1,
+  });
+  const weekday = firstDayInSeptember.weekday;
+  const isFirstDayLaborDay = weekday === 1;
+  const memorialDay = isFirstDayLaborDay
+    ? firstDayInSeptember
+    : firstDayInSeptember.plus({ days: 8 - weekday });
+
+  return +inst === +memorialDay;
+};
