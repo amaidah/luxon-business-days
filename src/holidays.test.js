@@ -143,6 +143,64 @@ describe('isLaborDay()', () => {
   });
 });
 
+describe('isThanksgivingDay()', () => {
+  it('knows Thanksgiving Days of any year', () => {
+    const thanks2019 = DateTime.fromObject({ year: 2019, month: 11, day: 28 });
+    const thanks2017 = DateTime.fromObject({ year: 2017, month: 11, day: 23 });
+    const thanks1988 = DateTime.fromObject({ year: 1988, month: 11, day: 24 });
+    const thanks2020 = DateTime.fromObject({ year: 2020, month: 11, day: 26 });
+    const thanksDays = [thanks2019, thanks2017, thanks1988, thanks2020];
+
+    thanksDays.forEach(day => {
+      expect(holidays.isThanksgivingDay(day)).toEqual(true);
+    });
+  });
+
+  it('knows Thanksgiving Day when November 1st happens to be the first Thursday', () => {
+    const yearWhenNovemberFirstWasThursday = 2018;
+    const thanks2018 = DateTime.fromObject({
+      year: yearWhenNovemberFirstWasThursday,
+      month: 11,
+      day: 22,
+    });
+
+    expect(holidays.isThanksgivingDay(thanks2018)).toEqual(true);
+  });
+
+  it('knows Thanksgiving Day when November 1st happens before Thursday of the week', () => {
+    const yearWhenNovemberFirstWasBeforeThursday = 2021;
+    const thanks2018 = DateTime.fromObject({
+      year: yearWhenNovemberFirstWasBeforeThursday,
+      month: 11,
+      day: 25,
+    });
+
+    expect(holidays.isThanksgivingDay(thanks2018)).toEqual(true);
+  });
+
+  it('knows Thanksgiving Day when November 1st happens after Thursday of the week', () => {
+    const yearWhenNovemberFirstWasAfterThursday = 2024;
+    const thanks2018 = DateTime.fromObject({
+      year: yearWhenNovemberFirstWasAfterThursday,
+      month: 11,
+      day: 28,
+    });
+
+    expect(holidays.isThanksgivingDay(thanks2018)).toEqual(true);
+  });
+
+  it('knows days that are not Thanksgiving Days', () => {
+    const notThanksgivingDays = [
+      DateTime.fromObject({ year: 2019, month: 3, day: 2 }),
+      DateTime.fromObject({ year: 2016, month: 9, day: 25 }),
+    ];
+
+    notThanksgivingDays.forEach(day => {
+      expect(holidays.isThanksgivingDay(day)).toEqual(false);
+    });
+  });
+});
+
 describe('isChristmasDay()', () => {
   it('knows Christmas Days of any year', () => {
     const christmasDays = [

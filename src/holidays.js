@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon';
 
 import { getEasterMonthAndDay } from './helpers';
+import { MONTH } from './constants';
 
 export const isNewYearsDay = function(inst) {
   const matchesMonth = inst.month === 1;
@@ -28,17 +29,15 @@ export const isEasterDay = function(inst) {
 // last Monday of May
 export const isMemorialDay = function(inst) {
   const DAYS_IN_MAY = 31;
-  const MONTH_OF_MAY = 5;
-  const isMatchingMonth = inst.month === MONTH_OF_MAY;
 
-  if (!isMatchingMonth) {
+  if (!getDoMonthsMatch(inst.month, MONTH.may)) {
     return false;
   }
 
   const instanceYear = inst.year;
   const lastDayInMay = DateTime.fromObject({
     year: instanceYear,
-    month: MONTH_OF_MAY,
+    month: MONTH.may,
     day: DAYS_IN_MAY,
   });
   const weekday = lastDayInMay.weekday;
@@ -56,17 +55,14 @@ export const isIndependanceDay = function(inst) {
 
 // first Monday in September
 export const isLaborDay = function(inst) {
-  const MONTH_OF_SEPTEMBER = 9;
-  const isMatchingMonth = inst.month === MONTH_OF_SEPTEMBER;
-
-  if (!isMatchingMonth) {
+  if (!getDoMonthsMatch(inst.month, MONTH.september)) {
     return false;
   }
 
   const instanceYear = inst.year;
   const firstDayInSeptember = DateTime.fromObject({
     year: instanceYear,
-    month: MONTH_OF_SEPTEMBER,
+    month: MONTH.september,
     day: 1,
   });
   const weekday = firstDayInSeptember.weekday;
@@ -79,6 +75,35 @@ export const isLaborDay = function(inst) {
 };
 
 // fourth Thursday in November
+export const isThanksgivingDay = function(inst) {
+  if (!getDoMonthsMatch(inst.month, MONTH.november)) {
+    return false;
+  }
+
+  function getPositionFromFirstThursday(weekday) {
+    const positionFromThursday = 4 - weekday;
+    const isThursdayInPreviousMonth = positionFromThursday < 0;
+
+    return isThursdayInPreviousMonth
+      ? positionFromThursday + 7
+      : positionFromThursday;
+  }
+
+  const instanceYear = inst.year;
+  const firstDayInNovember = DateTime.fromObject({
+    year: instanceYear,
+    month: MONTH.november,
+    day: 1,
+  });
+  const weekday = firstDayInNovember.weekday;
+  const positionFromFirstThursday = getPositionFromFirstThursday(weekday);
+  const threeWeeks = 21;
+  const thanksgivingDay = firstDayInNovember.plus({
+    days: positionFromFirstThursday + threeWeeks,
+  });
+
+  return +inst === +thanksgivingDay;
+};
 
 export const isChristmasDay = function(inst) {
   const matchesMonth = inst.month === 12;
@@ -86,3 +111,7 @@ export const isChristmasDay = function(inst) {
 
   return matchesMonth && matchesDay;
 };
+
+function getDoMonthsMatch(instanceMonth, month) {
+  return instanceMonth === month;
+}
