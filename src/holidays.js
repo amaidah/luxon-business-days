@@ -77,3 +77,12 @@ export const isLaborDay = function(inst) {
 
   return +inst === +memorialDay;
 };
+
+// fourth Thursday in November
+
+export const isChristmasDay = function(inst) {
+  const matchesMonth = inst.month === 12;
+  const matchesDay = inst.day === 25;
+
+  return matchesMonth && matchesDay;
+};
