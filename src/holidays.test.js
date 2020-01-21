@@ -142,3 +142,27 @@ describe('isLaborDay()', () => {
     });
   });
 });
+
+describe('isChristmasDay()', () => {
+  it('knows Christmas Days of any year', () => {
+    const christmasDays = [
+      DateTime.fromObject({ year: 1988, month: 12, day: 25 }),
+      DateTime.fromObject({ year: 2020, month: 12, day: 25 }),
+    ];
+
+    christmasDays.forEach(day => {
+      expect(holidays.isChristmasDay(day)).toEqual(true);
+    });
+  });
+
+  it('knows days that are not Christmas Days', () => {
+    const notChristmasDays = [
+      DateTime.fromObject({ year: 2019, month: 3, day: 2 }),
+      DateTime.fromObject({ year: 2016, month: 9, day: 25 }),
+    ];
+
+    notChristmasDays.forEach(day => {
+      expect(holidays.isChristmasDay(day)).toEqual(false);
+    });
+  });
+});
