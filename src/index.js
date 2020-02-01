@@ -1,10 +1,14 @@
 import { DateTime } from 'luxon';
 
-import { DEFAULT_BUSINESS_DAYS, DEFAULT_HOLIDAYS, ONE_DAY } from './defaults';
+import {
+  DEFAULT_BUSINESS_DAYS,
+  DEFAULT_HOLIDAY_MATCHERS,
+  ONE_DAY,
+} from './defaults';
 
 DateTime.prototype.setupBusiness = function({
   businessDays = DEFAULT_BUSINESS_DAYS,
-  holidays = DEFAULT_HOLIDAYS,
+  holidayMatchers = DEFAULT_HOLIDAY_MATCHERS,
 } = {}) {
   /**
    * luxon does not clone custom properties so to maintain
@@ -16,16 +20,22 @@ DateTime.prototype.setupBusiness = function({
    * business setup at a time currently
    */
   DateTime.prototype.businessDays = businessDays;
-  DateTime.prototype.holidays = holidays;
+  DateTime.prototype.holidayMatchers = holidayMatchers;
 };
 
 DateTime.prototype.clearBusinessSetup = function() {
   delete DateTime.prototype.businessDays;
-  delete DateTime.prototype.holidays;
+  delete DateTime.prototype.holidayMatchers;
 };
 
 DateTime.prototype.isHoliday = function() {
-  return false;
+  const holidayMatchers = this.holidayMatchers || DEFAULT_HOLIDAY_MATCHERS;
+
+  const isDayAnyHoliday = holidayMatchers.some(holidayMatcher => {
+    return holidayMatcher(this);
+  });
+
+  return isDayAnyHoliday;
 };
 
 DateTime.prototype.isBusinessDay = function() {
