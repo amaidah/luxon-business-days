@@ -1,5 +1,6 @@
+import * as holidays from './holidays';
 import { DateTime, clone } from './index';
-import { DEFAULT_BUSINESS_DAYS, DEFAULT_HOLIDAYS } from './defaults';
+import { DEFAULT_BUSINESS_DAYS, DEFAULT_HOLIDAY_MATCHERS } from './defaults';
 
 beforeEach(() => {
   DateTime.prototype.clearBusinessSetup();
@@ -39,7 +40,69 @@ describe('setupBusiness()', () => {
     expect(tomorrow.businessDays).toEqual([1]);
   });
 
-  // TODO: test for holidays setup
+  it('sets the default holiday matchers when called with no arguments', () => {
+    const dt = DateTime.local();
+    dt.setupBusiness();
+
+    expect(dt.holidayMatchers).toEqual(DEFAULT_HOLIDAY_MATCHERS);
+  });
+
+  it('can override default holidays with a config object', () => {
+    const dt = DateTime.local();
+    const myCompanyIsNoFun = [
+      holidays.isChristmasDay,
+      holidays.isNewYearsDay,
+      holidays.isThanksgivingDay,
+    ];
+    dt.setupBusiness({
+      holidayMatchers: myCompanyIsNoFun,
+    });
+
+    expect(dt.holidayMatchers).toEqual(myCompanyIsNoFun);
+  });
+});
+
+describe('isHoliday()', () => {
+  it('knows the default holidays', () => {
+    const defaultHolidays2019 = {
+      newYearsDay: { dt: DateTime.local(2019, 1, 1), isHoliday: true },
+      easterSunday: { dt: DateTime.local(2019, 4, 21), isHoliday: true },
+      memorialDay: { dt: DateTime.local(2019, 5, 27), isHoliday: true },
+      independanceDay: { dt: DateTime.local(2019, 7, 4), isHoliday: true },
+      laborDay: { dt: DateTime.local(2019, 9, 2), isHoliday: true },
+      thanksgivingDay: { dt: DateTime.local(2019, 11, 28), isHoliday: true },
+      christmasDay: { dt: DateTime.local(2019, 12, 25), isHoliday: true },
+    };
+
+    Object.values(defaultHolidays2019).forEach(({ dt, isHoliday }) => {
+      expect(dt.isHoliday()).toBe(isHoliday);
+    });
+  });
+
+  it('knows the holdays setup via config', () => {
+    const myCompanyIsNoFun = [
+      holidays.isChristmasDay,
+      holidays.isNewYearsDay,
+      holidays.isThanksgivingDay,
+      holidays.isIndependanceDay,
+    ];
+    DateTime.prototype.setupBusiness({ holidayMatchers: myCompanyIsNoFun });
+
+    const defaultHolidays2019 = {
+      newYearsDay: { dt: DateTime.local(2019, 1, 1), isHoliday: true },
+      easterSunday: { dt: DateTime.local(2019, 4, 21), isHoliday: false },
+      memorialDay: { dt: DateTime.local(2019, 5, 27), isHoliday: false },
+      independanceDay: { dt: DateTime.local(2019, 7, 4), isHoliday: true },
+      laborDay: { dt: DateTime.local(2019, 9, 2), isHoliday: false },
+      thanksgivingDay: { dt: DateTime.local(2019, 11, 28), isHoliday: true },
+      christmasDay: { dt: DateTime.local(2019, 12, 25), isHoliday: true },
+      randomDay: { dt: DateTime.local(2019, 3, 16), isHoliday: false },
+    };
+
+    Object.values(defaultHolidays2019).forEach(({ dt, isHoliday }) => {
+      expect(dt.isHoliday()).toBe(isHoliday);
+    });
+  });
 });
 
 describe('isBusinessDay()', () => {
@@ -115,6 +178,26 @@ describe('plusBusiness()', () => {
     const thursdayPlusBusinessDays = thursday.plusBusiness({ days: 3 });
 
     expect(+thursdayPlusBusinessDays === +nextTuesday).toBe(true);
+  });
+
+  it('knows how to add business days through default holidays like Independance Day', () => {
+    const wednesday = DateTime.local(2019, 7, 3);
+    const nextMondayAfterJuly4thAndWeekend = DateTime.local(2019, 7, 8);
+    const wednesdayPlusBusinessDays = wednesday.plusBusiness({ days: 2 });
+
+    expect(+wednesdayPlusBusinessDays === +nextMondayAfterJuly4thAndWeekend);
+  });
+
+  it('knows how to add business days through holidays setup via config', () => {
+    const dt = DateTime.local(2019, 7, 3);
+    const myCompanyTakesNoHolidays = [];
+    dt.setupBusiness({
+      holidayMatchers: myCompanyTakesNoHolidays,
+    });
+    const friday = DateTime.local(2019, 7, 5);
+    const wednesdayPlusBusinessDays = dt.plusBusiness({ days: 2 });
+
+    expect(+wednesdayPlusBusinessDays === +friday);
   });
 });
 
