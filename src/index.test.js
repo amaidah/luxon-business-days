@@ -78,6 +78,31 @@ describe('isHoliday()', () => {
       expect(dt.isHoliday()).toBe(isHoliday);
     });
   });
+
+  it('knows the holdays setup via config', () => {
+    const myCompanyIsNoFun = [
+      holidays.isChristmasDay,
+      holidays.isNewYearsDay,
+      holidays.isThanksgivingDay,
+      holidays.isIndependanceDay,
+    ];
+    DateTime.prototype.setupBusiness({ holidayMatchers: myCompanyIsNoFun });
+
+    const defaultHolidays2019 = {
+      newYearsDay: { dt: DateTime.local(2019, 1, 1), isHoliday: true },
+      easterSunday: { dt: DateTime.local(2019, 4, 21), isHoliday: false },
+      memorialDay: { dt: DateTime.local(2019, 5, 27), isHoliday: false },
+      independanceDay: { dt: DateTime.local(2019, 7, 4), isHoliday: true },
+      laborDay: { dt: DateTime.local(2019, 9, 2), isHoliday: false },
+      thanksgivingDay: { dt: DateTime.local(2019, 11, 28), isHoliday: true },
+      christmasDay: { dt: DateTime.local(2019, 12, 25), isHoliday: true },
+      randomDay: { dt: DateTime.local(2019, 3, 16), isHoliday: false },
+    };
+
+    Object.values(defaultHolidays2019).forEach(({ dt, isHoliday }) => {
+      expect(dt.isHoliday()).toBe(isHoliday);
+    });
+  });
 });
 
 describe('isBusinessDay()', () => {
@@ -153,6 +178,26 @@ describe('plusBusiness()', () => {
     const thursdayPlusBusinessDays = thursday.plusBusiness({ days: 3 });
 
     expect(+thursdayPlusBusinessDays === +nextTuesday).toBe(true);
+  });
+
+  it('knows how to add business days through default holidays like Independance Day', () => {
+    const wednesday = DateTime.local(2019, 7, 3);
+    const nextMondayAfterJuly4thAndWeekend = DateTime.local(2019, 7, 8);
+    const wednesdayPlusBusinessDays = wednesday.plusBusiness({ days: 2 });
+
+    expect(+wednesdayPlusBusinessDays === +nextMondayAfterJuly4thAndWeekend);
+  });
+
+  it('knows how to add business days through holidays setup via config', () => {
+    const dt = DateTime.local(2019, 7, 3);
+    const myCompanyTakesNoHolidays = [];
+    dt.setupBusiness({
+      holidayMatchers: myCompanyTakesNoHolidays,
+    });
+    const friday = DateTime.local(2019, 7, 5);
+    const wednesdayPlusBusinessDays = dt.plusBusiness({ days: 2 });
+
+    expect(+wednesdayPlusBusinessDays === +friday);
   });
 });
 

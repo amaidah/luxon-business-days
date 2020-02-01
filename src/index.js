@@ -55,7 +55,7 @@ DateTime.prototype.plusBusiness = function({ days = ONE_DAY } = {}) {
   while (businessDaysLeftToAdd > 0) {
     dt = dt.plus({ days: ONE_DAY });
 
-    if (dt.isBusinessDay()) {
+    if (dt.isBusinessDay() && !dt.isHoliday()) {
       businessDaysLeftToAdd--;
     }
   }
