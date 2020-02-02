@@ -93,6 +93,10 @@ dt = dt.plusBusiness({ days: 2 }); // 7/9/19 - Tuesday (Skipped through Saturday
 // Now do what you normally would with a DateTime instance.
 ```
 
+## Examples
+
+* [Display a range of business days in future](https://codesandbox.io/s/luxon-business-days-range-example-tmb1d).
+
 ## API
 
 ## Functions
@@ -102,7 +106,7 @@ dt = dt.plusBusiness({ days: 2 }); // 7/9/19 - Tuesday (Skipped through Saturday
 <dd><p>Sets up business days and holiday matchers globally for all DateTime instances.</p>
 </dd>
 <dt><a href="#clearBusinessSetup">clearBusinessSetup()</a></dt>
-<dd><p>Clears business setup from DateTime instance.</p>
+<dd><p>Clears business setup globally from all DateTime instances.</p>
 </dd>
 <dt><a href="#isHoliday">isHoliday()</a> ⇒ <code>boolean</code></dt>
 <dd><p>Checks if DateTime instance is a holiday by checking against all holiday matchers.</p>
@@ -130,7 +134,7 @@ Sets up business days and holiday matchers globally for all DateTime instances.
 <a name="clearBusinessSetup"></a>
 
 ## clearBusinessSetup()
-Clears business setup from DateTime instance.
+Clears business setup globally from all DateTime instances.
 
 **Kind**: global function  
 <a name="isHoliday"></a>

@@ -30,7 +30,7 @@ DateTime.prototype.setupBusiness = function({
 };
 
 /**
- * Clears business setup from DateTime instance.
+ * Clears business setup globally from all DateTime instances.
  * @method clearBusinessSetup
  */
 DateTime.prototype.clearBusinessSetup = function() {
