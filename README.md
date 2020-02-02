@@ -79,10 +79,30 @@ Coming soon.
 
 ## API
 
+## Functions
+
+<dl>
+<dt><a href="#setupBusiness">setupBusiness([businessDays], [holidayMatchers])</a></dt>
+<dd><p>Sets up business days and holiday matchers globally for all DateTime instances.</p>
+</dd>
+<dt><a href="#clearBusinessSetup">clearBusinessSetup()</a></dt>
+<dd><p>Clears business setup from DateTime instance.</p>
+</dd>
+<dt><a href="#isHoliday">isHoliday()</a> ⇒ <code>boolean</code></dt>
+<dd><p>Checks if DateTime instance is a holiday by checking against all holiday matchers.</p>
+</dd>
+<dt><a href="#isBusinessDay">isBusinessDay()</a> ⇒ <code>boolean</code></dt>
+<dd><p>Checks if DateTime instance is a business day.</p>
+</dd>
+<dt><a href="#plusBusiness">plusBusiness([days])</a> ⇒ <code>DateTime</code></dt>
+<dd><p>Adds business days to an existing DateTime instance.</p>
+</dd>
+</dl>
+
 <a name="setupBusiness"></a>
 
 ## setupBusiness([businessDays], [holidayMatchers])
-Sets up business days and holiday matchers.
+Sets up business days and holiday matchers globally for all DateTime instances.
 
 **Kind**: global function  
 
@@ -90,4 +110,33 @@ Sets up business days and holiday matchers.
 | --- | --- | --- | --- |
 | [businessDays] | <code>Array.&lt;number&gt;</code> | <code>DEFAULT_BUSINESS_DAYS</code> | The working business days for the business. |
 | [holidayMatchers] | <code>Array.&lt;function()&gt;</code> | <code>DEFAULT_HOLIDAY_MATCHERS</code> | The holiday matchers used to check if a particular day is a holiday for the business. |
+
+<a name="clearBusinessSetup"></a>
+
+## clearBusinessSetup()
+Clears business setup from DateTime instance.
+
+**Kind**: global function  
+<a name="isHoliday"></a>
+
+## isHoliday() ⇒ <code>boolean</code>
+Checks if DateTime instance is a holiday by checking against all holiday matchers.
+
+**Kind**: global function  
+<a name="isBusinessDay"></a>
+
+## isBusinessDay() ⇒ <code>boolean</code>
+Checks if DateTime instance is a business day.
+
+**Kind**: global function  
+<a name="plusBusiness"></a>
+
+## plusBusiness([days]) ⇒ <code>DateTime</code>
+Adds business days to an existing DateTime instance.
+
+**Kind**: global function  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [days] | <code>number</code> | <code>1</code> | The number of business days to add. |
 
