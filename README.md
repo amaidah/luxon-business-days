@@ -77,6 +77,21 @@ dt.setupBusiness({ businessDays: awesomeFourDayBusinessWeek });
 
 Coming soon.
 
+## Usage
+
+Basic:
+```
+import { DateTime } from 'luxon-business-days';
+
+// Day before July 4
+let dt = DateTime.local(2019, 7, 3);
+
+dt = dt.plusBusiness(); // 7/5/19 - Friday
+dt = dt.plusBusiness({ days: 2 }); // 7/9/19 - Tuesday (Skipped through Saturday/Sunday)
+
+// Now do what you normally would with a DateTime instance.
+```
+
 ## API
 
 ## Functions
