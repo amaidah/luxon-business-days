@@ -9,6 +9,7 @@
     "test:watch": "NODE_ENV=test jest --watch --coverage=false",
     "test:coverage": "NODE_ENV=test jest --collect-coverage",
     "test:ci": "jest --collect-coverage",
+    "docs": "jsdoc2md --template README.hbs --files src/index.js > README.md",
     "clean": "rimraf dist",
     "build": "webpack",
     "prepare": "npm run clean && npm run lint && npm run build"
@@ -35,6 +36,7 @@
     "eslint-plugin-prettier": "^3.1.0",
     "husky": "^3.0.4",
     "jest": "^24.9.0",
+    "jsdoc-to-markdown": "^5.0.3",
     "lint-staged": "^9.2.4",
     "luxon": "^1.17.2",
     "prettier": "^1.18.2",
@@ -45,7 +47,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && npm run test"
+      "pre-commit": "npm run docs && lint-staged && npm run test"
     }
   },
   "lint-staged": {
