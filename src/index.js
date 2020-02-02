@@ -7,7 +7,7 @@ import {
 } from './defaults';
 
 /**
- * Sets up business days and holiday matchers.
+ * Sets up business days and holiday matchers globally for all DateTime instances.
  * @method setupBusiness
  * @param {Array<number>} [businessDays=DEFAULT_BUSINESS_DAYS] - The working business days for the business.
  * @param {Array<function>} [holidayMatchers=DEFAULT_HOLIDAY_MATCHERS] - The holiday matchers used to check if a particular day is a holiday for the business.
@@ -29,11 +29,20 @@ DateTime.prototype.setupBusiness = function({
   DateTime.prototype.holidayMatchers = holidayMatchers;
 };
 
+/**
+ * Clears business setup from DateTime instance.
+ * @method clearBusinessSetup
+ */
 DateTime.prototype.clearBusinessSetup = function() {
   delete DateTime.prototype.businessDays;
   delete DateTime.prototype.holidayMatchers;
 };
 
+/**
+ * Checks if DateTime instance is a holiday by checking against all holiday matchers.
+ * @method isHoliday
+ * @returns {boolean}
+ */
 DateTime.prototype.isHoliday = function() {
   const holidayMatchers = this.holidayMatchers || DEFAULT_HOLIDAY_MATCHERS;
 
@@ -44,12 +53,23 @@ DateTime.prototype.isHoliday = function() {
   return isDayAnyHoliday;
 };
 
+/**
+ * Checks if DateTime instance is a business day.
+ * @method isBusinessDay
+ * @returns {boolean}
+ */
 DateTime.prototype.isBusinessDay = function() {
   const businessDays = this.businessDays || DEFAULT_BUSINESS_DAYS;
 
   return businessDays.includes(this.weekday);
 };
 
+/**
+ * Adds business days to an existing DateTime instance.
+ * @method plusBusiness
+ * @param {number} [days=1] - The number of business days to add.
+ * @returns {DateTime}
+ */
 DateTime.prototype.plusBusiness = function({ days = ONE_DAY } = {}) {
   let dt = clone(this);
   if (!dt.isValid) {
