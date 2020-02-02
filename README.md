@@ -80,7 +80,8 @@ Coming soon.
 ## Usage
 
 Basic:
-```
+
+```javascript
 import { DateTime } from 'luxon-business-days';
 
 // Day before July 4
