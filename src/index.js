@@ -6,6 +6,12 @@ import {
   ONE_DAY,
 } from './defaults';
 
+/**
+ * Sets up business days and holiday matchers.
+ * @method setupBusiness
+ * @param {Array<number>} [businessDays=DEFAULT_BUSINESS_DAYS] - The working business days for the business.
+ * @param {Array<function>} [holidayMatchers=DEFAULT_HOLIDAY_MATCHERS] - The holiday matchers used to check if a particular day is a holiday for the business.
+ */
 DateTime.prototype.setupBusiness = function({
   businessDays = DEFAULT_BUSINESS_DAYS,
   holidayMatchers = DEFAULT_HOLIDAY_MATCHERS,
