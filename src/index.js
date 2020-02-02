@@ -1,5 +1,7 @@
 import { DateTime } from 'luxon';
 
+import * as holidays from './holidays';
+
 import {
   DEFAULT_BUSINESS_DAYS,
   DEFAULT_HOLIDAY_MATCHERS,
@@ -7,7 +9,22 @@ import {
 } from './defaults';
 
 /**
+ * All available holiday matchers provided.
+ * @augments DateTime
+ * @var {Object} availableHolidayMatchers
+ * @property {function} isNewYearsDay - A provided holiday matcher.
+ * @property {function} isEasterDay - A provided holiday matcher.
+ * @property {function} isMemorialDay - A provided holiday matcher.
+ * @property {function} isIndependanceDay - A provided holiday matcher.
+ * @property {function} isLaborDay - A provided holiday matcher.
+ * @property {function} isThanksgivingDay - A provided holiday matcher.
+ * @property {function} isChristmasDay - A provided holiday matcher.
+ */
+DateTime.prototype.availableHolidayMatchers = holidays;
+
+/**
  * Sets up business days and holiday matchers globally for all DateTime instances.
+ * @augments DateTime
  * @method setupBusiness
  * @param {Array<number>} [businessDays=DEFAULT_BUSINESS_DAYS] - The working business days for the business.
  * @param {Array<function>} [holidayMatchers=DEFAULT_HOLIDAY_MATCHERS] - The holiday matchers used to check if a particular day is a holiday for the business.
@@ -31,6 +48,7 @@ DateTime.prototype.setupBusiness = function({
 
 /**
  * Clears business setup globally from all DateTime instances.
+ * @augments DateTime
  * @method clearBusinessSetup
  */
 DateTime.prototype.clearBusinessSetup = function() {
@@ -40,6 +58,7 @@ DateTime.prototype.clearBusinessSetup = function() {
 
 /**
  * Checks if DateTime instance is a holiday by checking against all holiday matchers.
+ * @augments DateTime
  * @method isHoliday
  * @returns {boolean}
  */
@@ -55,6 +74,7 @@ DateTime.prototype.isHoliday = function() {
 
 /**
  * Checks if DateTime instance is a business day.
+ * @augments DateTime
  * @method isBusinessDay
  * @returns {boolean}
  */
@@ -66,6 +86,7 @@ DateTime.prototype.isBusinessDay = function() {
 
 /**
  * Adds business days to an existing DateTime instance.
+ * @augments DateTime
  * @method plusBusiness
  * @param {number} [days=1] - The number of business days to add.
  * @returns {DateTime}

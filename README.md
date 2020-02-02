@@ -99,13 +99,21 @@ dt = dt.plusBusiness({ days: 2 }); // 7/9/19 - Tuesday (Skipped through Saturday
 
 ## API
 
+## Members
+
+<dl>
+<dt><a href="#availableHolidayMatchers">availableHolidayMatchers</a> : <code>Object</code></dt>
+<dd><p>All available holiday matchers provided.</p>
+</dd>
+</dl>
+
 ## Functions
 
 <dl>
-<dt><a href="#setupBusiness">setupBusiness([businessDays], [holidayMatchers])</a></dt>
+<dt><a href="#setupBusiness">setupBusiness([businessDays], [holidayMatchers])</a> ⇐ <code>DateTime</code></dt>
 <dd><p>Sets up business days and holiday matchers globally for all DateTime instances.</p>
 </dd>
-<dt><a href="#clearBusinessSetup">clearBusinessSetup()</a></dt>
+<dt><a href="#clearBusinessSetup">clearBusinessSetup()</a> ⇐ <code>DateTime</code></dt>
 <dd><p>Clears business setup globally from all DateTime instances.</p>
 </dd>
 <dt><a href="#isHoliday">isHoliday()</a> ⇒ <code>boolean</code></dt>
@@ -119,12 +127,32 @@ dt = dt.plusBusiness({ days: 2 }); // 7/9/19 - Tuesday (Skipped through Saturday
 </dd>
 </dl>
 
+<a name="availableHolidayMatchers"></a>
+
+## availableHolidayMatchers : <code>Object</code>
+All available holiday matchers provided.
+
+**Kind**: global variable  
+**Extends**: <code>DateTime</code>  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| isNewYearsDay | <code>function</code> | A provided holiday matcher. |
+| isEasterDay | <code>function</code> | A provided holiday matcher. |
+| isMemorialDay | <code>function</code> | A provided holiday matcher. |
+| isIndependanceDay | <code>function</code> | A provided holiday matcher. |
+| isLaborDay | <code>function</code> | A provided holiday matcher. |
+| isThanksgivingDay | <code>function</code> | A provided holiday matcher. |
+| isChristmasDay | <code>function</code> | A provided holiday matcher. |
+
 <a name="setupBusiness"></a>
 
-## setupBusiness([businessDays], [holidayMatchers])
+## setupBusiness([businessDays], [holidayMatchers]) ⇐ <code>DateTime</code>
 Sets up business days and holiday matchers globally for all DateTime instances.
 
 **Kind**: global function  
+**Extends**: <code>DateTime</code>  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -133,28 +161,32 @@ Sets up business days and holiday matchers globally for all DateTime instances.
 
 <a name="clearBusinessSetup"></a>
 
-## clearBusinessSetup()
+## clearBusinessSetup() ⇐ <code>DateTime</code>
 Clears business setup globally from all DateTime instances.
 
 **Kind**: global function  
+**Extends**: <code>DateTime</code>  
 <a name="isHoliday"></a>
 
 ## isHoliday() ⇒ <code>boolean</code>
 Checks if DateTime instance is a holiday by checking against all holiday matchers.
 
 **Kind**: global function  
+**Extends**: <code>DateTime</code>  
 <a name="isBusinessDay"></a>
 
 ## isBusinessDay() ⇒ <code>boolean</code>
 Checks if DateTime instance is a business day.
 
 **Kind**: global function  
+**Extends**: <code>DateTime</code>  
 <a name="plusBusiness"></a>
 
 ## plusBusiness([days]) ⇒ <code>DateTime</code>
 Adds business days to an existing DateTime instance.
 
 **Kind**: global function  
+**Extends**: <code>DateTime</code>  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |

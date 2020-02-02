@@ -6,6 +6,14 @@ beforeEach(() => {
   DateTime.prototype.clearBusinessSetup();
 });
 
+describe('availableHolidayMatchers', () => {
+  it('is the entire list of holidayMatchers provided by this pkg', () => {
+    const dt = DateTime.local();
+
+    expect(dt.availableHolidayMatchers).toEqual(holidays);
+  });
+});
+
 describe('setupBusiness()', () => {
   it('sets the default business days when called with no arguments', () => {
     let dt = DateTime.local();
