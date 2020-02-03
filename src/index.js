@@ -9,7 +9,7 @@ import {
 } from './defaults';
 
 /**
- * All available holiday matchers provided.
+ * All built-in holiday matchers.
  * @augments DateTime
  * @var {Object} availableHolidayMatchers
  * @property {function} isNewYearsDay - A provided holiday matcher.
