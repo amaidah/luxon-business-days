@@ -28,7 +28,7 @@
     "momentjs"
   ],
   "author": "Andrew Maidah <a.maidah@gmail.com>",
-  "license": "",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/amaidah/luxon-business-days/issues"
   },
