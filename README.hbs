@@ -75,7 +75,65 @@ dt.setupBusiness({ businessDays: awesomeFourDayBusinessWeek });
 
 #### Configure holidays
 
-Coming soon.
+Pick from available holiday matchers:
+
+```javascript
+import { DateTime } from 'luxon-business-days';
+
+const dt = DateTime.local();
+const { availableHolidayMatchers } = dt;
+const myCompanyIsNoFun = [
+  availableHolidayMatchers.isNewYearsDay,
+  availableHolidayMatchers.isChristmasDay,
+];
+
+dt.setupBusiness({ holidayMatchers: myCompanyIsNoFun });
+```
+
+No holidays:
+
+```javascript
+import { DateTime } from 'luxon-business-days';
+
+const dt = DateTime.local();
+
+dt.setupBusiness({ holidayMatchers: [] });
+// Congrats, you will successfuly get everyone to quit
+```
+
+Custom holiday matchers:
+
+A holiday matcher is simply a function that takes in a `DateTime` instance and returns a boolean. This library differs from other business day libraries, in that the "matcher" concept allows you to algorithmically determine what is a holiday without to keep a hardcoded list of dates that are updated annually.
+
+It is easy to write a basic matcher:
+
+```javascript
+import { DateTime } from 'luxon-business-days';
+
+const isCelebratingKobe = function(inst) {
+  // Company always celebrates the day Kobe died
+  const kobeRIP = DateTime.fromObject({ month: 1, day: 26 });
+
+  // Company always celebrates Kobe Day
+  const kobeDay = DateTime.fromObject({ month: 8, day: 24 });
+
+  // Matches the following two days regardless of year
+  return +inst === +kobeRIP || +inst === +kobeDay;
+};
+
+const dt = DateTime.local();
+const myHolidays = [
+  dt.availableHolidayMatchers.isNewYearsDay,
+  dt.availableHolidayMatchers.isChristmasDay,
+  isCelebratingKobe,
+];
+
+dt.setupBusiness({ holidayMatchers: myHolidays });
+// Congrats, now your business will consider New Years, Christmas
+// and the two Kobe days as company holidays.
+```
+
+Tip: When writing custom holiday matchers, it is probably better to avoid harcoding years or dates and instead programatically generating holidays. Take a look at the provided [matchers](https://github.com/amaidah/luxon-business-days/blob/master/src/holidays.js) for ideas.
 
 ## Usage
 

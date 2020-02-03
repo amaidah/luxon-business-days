@@ -62,6 +62,7 @@ describe('setupBusiness()', () => {
       holidays.isNewYearsDay,
       holidays.isThanksgivingDay,
     ];
+
     dt.setupBusiness({
       holidayMatchers: myCompanyIsNoFun,
     });
