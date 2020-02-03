@@ -18,6 +18,15 @@
     "type": "git",
     "url": "git+https://github.com/amaidah/luxon-business-days.git"
   },
+  "keywords": [
+    "luxon",
+    "business",
+    "days",
+    "plugin",
+    "biz",
+    "moment",
+    "momentjs"
+  ],
   "author": "Andrew Maidah <a.maidah@gmail.com>",
   "license": "",
   "bugs": {
@@ -25,7 +34,7 @@
   },
   "homepage": "https://github.com/amaidah/luxon-business-days#readme",
   "peerDependencies": {
-    "luxon": "1.17.x"
+    "luxon": "1.x.x"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",

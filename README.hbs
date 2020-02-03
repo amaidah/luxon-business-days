@@ -5,7 +5,7 @@
 [![codecov](https://codecov.io/gh/amaidah/luxon-business-days/branch/master/graph/badge.svg)](https://codecov.io/gh/amaidah/luxon-business-days)
 ![luxon-business-days](https://badgen.net/bundlephobia/minzip/luxon-business-days)
 
-Luxon Business Days is a Luxon plugin for calculating and manipulating business days.
+Luxon Business Days is a [Luxon](https://github.com/moment/luxon) plugin for calculating and manipulating business days.
 
 Inspired by [moment-business-days](https://github.com/kalmecak/moment-business-days).
 
