@@ -75,7 +75,7 @@ dt.setupBusiness({ businessDays: awesomeFourDayBusinessWeek });
 
 #### Configure holidays
 
-##### Pick from available holiday matchers:
+Pick from available holiday matchers:
 
 ```javascript
 import { DateTime } from 'luxon-business-days';
@@ -90,7 +90,7 @@ const myCompanyIsNoFun = [
 dt.setupBusiness({ holidayMatchers: myCompanyIsNoFun });
 ```
 
-##### No holidays:
+No holidays:
 
 ```javascript
 import { DateTime } from 'luxon-business-days';
@@ -101,7 +101,7 @@ dt.setupBusiness({ holidayMatchers: [] });
 // Congrats, you will successfuly get everyone to quit
 ```
 
-##### Custom holiday matchers:
+Custom holiday matchers:
 
 A holiday matcher is simply a function that takes in a `DateTime` instance and returns a boolean. This allows you to algorithmically determine what is considered a holiday without requiring a hardcoded list of dates that are updated and maintained annually.
 
