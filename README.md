@@ -110,11 +110,15 @@ It is easy to write a basic matcher:
 ```javascript
 import { DateTime } from 'luxon-business-days';
 
+/**
+ * @param {DateTime} - An instance of DateTime.
+ * @returns {boolean}
+ */
 const isCelebratingKobe = function(inst) {
-  // Company always celebrates the day Kobe died
+  // Celebrate the day Kobe died
   const kobeRIP = DateTime.fromObject({ month: 1, day: 26 });
 
-  // Company always celebrates Kobe Day
+  // Celebrate Kobe Day
   const kobeDay = DateTime.fromObject({ month: 8, day: 24 });
 
   // Matches the following two days regardless of year
@@ -129,8 +133,8 @@ const myHolidays = [
 ];
 
 dt.setupBusiness({ holidayMatchers: myHolidays });
-// Congrats, now your business will consider New Years, Christmas
-// and the two Kobe days as company holidays.
+// Congrats, now your business will consider New Years, 
+// Christmas, and the two Kobe days as holidays.
 ```
 
 Tip: When writing custom holiday matchers, it is probably better to avoid harcoding years or dates and instead programatically generating holidays. Take a look at the provided [matchers](https://github.com/amaidah/luxon-business-days/blob/master/src/holidays.js) for ideas.
@@ -161,7 +165,7 @@ dt = dt.plusBusiness({ days: 2 }); // 7/9/19 - Tuesday (Skipped through Saturday
 
 <dl>
 <dt><a href="#availableHolidayMatchers">availableHolidayMatchers</a> : <code>Object</code></dt>
-<dd><p>All available holiday matchers provided.</p>
+<dd><p>All built-in holiday matchers.</p>
 </dd>
 </dl>
 
@@ -188,7 +192,7 @@ dt = dt.plusBusiness({ days: 2 }); // 7/9/19 - Tuesday (Skipped through Saturday
 <a name="availableHolidayMatchers"></a>
 
 ## availableHolidayMatchers : <code>Object</code>
-All available holiday matchers provided.
+All built-in holiday matchers.
 
 **Kind**: global variable  
 **Extends**: <code>DateTime</code>  
