@@ -13,7 +13,7 @@ Inspired by [moment-business-days](https://github.com/kalmecak/moment-business-d
 
 - Add business days to a standard luxon `DateTime` instance. For instance, to calculate the arrival date of a shipment.
 - Customizable and extendable. Configure the business working days and holidays of your business.
-- Uses holiday "matcher functions" avoiding the need to continually update holiday date configs every year.
+- Uses holiday "matcher functions" avoiding the need to manually maintain and update holiday date configs every year.
 
 ## Install
 
@@ -75,7 +75,7 @@ dt.setupBusiness({ businessDays: awesomeFourDayBusinessWeek });
 
 #### Configure holidays
 
-Pick from available holiday matchers:
+##### Pick from available holiday matchers:
 
 ```javascript
 import { DateTime } from 'luxon-business-days';
@@ -90,7 +90,7 @@ const myCompanyIsNoFun = [
 dt.setupBusiness({ holidayMatchers: myCompanyIsNoFun });
 ```
 
-No holidays:
+##### No holidays:
 
 ```javascript
 import { DateTime } from 'luxon-business-days';
@@ -101,9 +101,9 @@ dt.setupBusiness({ holidayMatchers: [] });
 // Congrats, you will successfuly get everyone to quit
 ```
 
-Custom holiday matchers:
+##### Custom holiday matchers:
 
-A holiday matcher is simply a function that takes in a `DateTime` instance and returns a boolean. This library differs from other business day libraries, in that the "matcher" concept allows you to algorithmically determine what is a holiday without to keep a hardcoded list of dates that are updated annually.
+A holiday matcher is simply a function that takes in a `DateTime` instance and returns a boolean. This allows you to algorithmically determine what is considered a holiday without requiring a hardcoded list of dates that are updated and maintained annually.
 
 It is easy to write a basic matcher:
 
@@ -153,7 +153,7 @@ dt = dt.plusBusiness({ days: 2 }); // 7/9/19 - Tuesday (Skipped through Saturday
 
 ## Examples
 
-* [Display a range of business days in future](https://codesandbox.io/s/luxon-business-days-range-example-tmb1d).
+* [Display a range of delivery dates for a shipment](https://codesandbox.io/s/luxon-business-days-range-example-tmb1d).
 
 ## API
 
