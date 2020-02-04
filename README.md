@@ -206,6 +206,7 @@ All built-in holiday matchers.
 | isMemorialDay | <code>function</code> | A provided holiday matcher. |
 | isIndependanceDay | <code>function</code> | A provided holiday matcher. |
 | isLaborDay | <code>function</code> | A provided holiday matcher. |
+| isColumbusDay | <code>function</code> | A provided holiday matcher. |
 | isThanksgivingDay | <code>function</code> | A provided holiday matcher. |
 | isChristmasDay | <code>function</code> | A provided holiday matcher. |
 
