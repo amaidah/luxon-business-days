@@ -16,10 +16,10 @@ export const isMLKDay = function(inst) {
     return false;
   }
 
-  const mlkDay = getNthDayOfMonth({
+  const mlkDay = getNthTargetDayOfMonth({
     n: 3,
     day: 1,
-    month: 1,
+    month: MONTH.january,
     year: inst.year,
   });
 
@@ -90,16 +90,32 @@ export const isLaborDay = function(inst) {
   return +inst === +memorialDay;
 };
 
+// second Monday of October
+export const isColumbusDay = function(inst) {
+  if (!getDoMonthsMatch(inst.month, MONTH.october)) {
+    return false;
+  }
+
+  const columbusDay = getNthTargetDayOfMonth({
+    n: 2,
+    day: 1,
+    month: MONTH.october,
+    year: inst.year,
+  });
+
+  return +inst === +columbusDay;
+};
+
 // fourth Thursday in November
 export const isThanksgivingDay = function(inst) {
   if (!getDoMonthsMatch(inst.month, MONTH.november)) {
     return false;
   }
 
-  const thanksgivingDay = getNthDayOfMonth({
+  const thanksgivingDay = getNthTargetDayOfMonth({
     n: 4,
     day: 4,
-    month: 11,
+    month: MONTH.november,
     year: inst.year,
   });
 
@@ -117,7 +133,7 @@ function getDoMonthsMatch(instanceMonth, month) {
   return instanceMonth === month;
 }
 
-function getNthDayOfMonth({ n, day, month, year }) {
+function getNthTargetDayOfMonth({ n, day, month, year }) {
   const firstDayOfMonth = DateTime.fromObject({
     day: 1,
     month,

@@ -18,6 +18,7 @@ import {
  * @property {function} isMemorialDay - A provided holiday matcher.
  * @property {function} isIndependanceDay - A provided holiday matcher.
  * @property {function} isLaborDay - A provided holiday matcher.
+ * @property {function} isColumbusDay - A provided holiday matcher.
  * @property {function} isThanksgivingDay - A provided holiday matcher.
  * @property {function} isChristmasDay - A provided holiday matcher.
  */

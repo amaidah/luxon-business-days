@@ -170,6 +170,50 @@ describe('isLaborDay()', () => {
   });
 });
 
+describe('isColumbusDay()', () => {
+  it('knows Columbus Days of any year', () => {
+    const columb2019 = DateTime.fromObject({ year: 2019, month: 10, day: 14 });
+    const columb2017 = DateTime.fromObject({ year: 2017, month: 10, day: 9 });
+    const columb1988 = DateTime.fromObject({ year: 1988, month: 10, day: 10 });
+    const columb2020 = DateTime.fromObject({ year: 2020, month: 10, day: 12 });
+    const columb2036 = DateTime.fromObject({ year: 2036, month: 10, day: 13 });
+    const columbDays = [
+      columb2019,
+      columb2017,
+      columb1988,
+      columb2020,
+      columb2036,
+    ];
+
+    columbDays.forEach(day => {
+      expect(holidays.isColumbusDay(day)).toEqual(true);
+    });
+  });
+
+  it('knows days that are not Columbus Day in October', () => {
+    const notColumbusDays = [
+      DateTime.fromObject({ year: 2019, month: 10, day: 22 }),
+      DateTime.fromObject({ year: 2016, month: 10, day: 16 }),
+    ];
+
+    notColumbusDays.forEach(day => {
+      expect(holidays.isColumbusDay(day)).toEqual(false);
+    });
+  });
+
+  it('knows if a day is not Columbus Day', () => {
+    const someRandomDays = [
+      DateTime.fromObject({ month: 1, day: 13 }),
+      DateTime.fromObject({ month: 1, day: 3 }),
+      DateTime.fromObject({ month: 5, day: 23 }),
+    ];
+
+    someRandomDays.forEach(day => {
+      expect(holidays.isColumbusDay(day)).toEqual(false);
+    });
+  });
+});
+
 describe('isThanksgivingDay()', () => {
   it('knows Thanksgiving Days of any year', () => {
     const thanks2019 = DateTime.fromObject({ year: 2019, month: 11, day: 28 });
