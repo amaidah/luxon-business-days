@@ -13,6 +13,7 @@ import {
  * @augments DateTime
  * @var {Object} availableHolidayMatchers
  * @property {function} isNewYearsDay - A provided holiday matcher.
+ * @property {function} isMLKDay - A provided holiday matcher.
  * @property {function} isEasterDay - A provided holiday matcher.
  * @property {function} isMemorialDay - A provided holiday matcher.
  * @property {function} isIndependanceDay - A provided holiday matcher.

@@ -1,13 +1,29 @@
 import { DateTime } from 'luxon';
 
 import { getEasterMonthAndDay } from './helpers';
-import { MONTH } from './constants';
+import { MONTH, ONE_WEEK } from './constants';
 
 export const isNewYearsDay = function(inst) {
   const matchesMonth = inst.month === 1;
   const matchesDay = inst.day === 1;
 
   return matchesMonth && matchesDay;
+};
+
+// third Monday in January
+export const isMLKDay = function(inst) {
+  if (!getDoMonthsMatch(inst.month, MONTH.january)) {
+    return false;
+  }
+
+  const mlkDay = getNthDayOfMonth({
+    n: 3,
+    day: 1,
+    month: 1,
+    year: inst.year,
+  });
+
+  return +inst === +mlkDay;
 };
 
 // first Sunday after the Full Moon date, that falls on or after March 21
@@ -80,26 +96,11 @@ export const isThanksgivingDay = function(inst) {
     return false;
   }
 
-  function getPositionFromFirstThursday(weekday) {
-    const positionFromThursday = 4 - weekday;
-    const isThursdayInPreviousMonth = positionFromThursday < 0;
-
-    return isThursdayInPreviousMonth
-      ? positionFromThursday + 7
-      : positionFromThursday;
-  }
-
-  const instanceYear = inst.year;
-  const firstDayInNovember = DateTime.fromObject({
-    year: instanceYear,
-    month: MONTH.november,
-    day: 1,
-  });
-  const weekday = firstDayInNovember.weekday;
-  const positionFromFirstThursday = getPositionFromFirstThursday(weekday);
-  const threeWeeks = 21;
-  const thanksgivingDay = firstDayInNovember.plus({
-    days: positionFromFirstThursday + threeWeeks,
+  const thanksgivingDay = getNthDayOfMonth({
+    n: 4,
+    day: 4,
+    month: 11,
+    year: inst.year,
   });
 
   return +inst === +thanksgivingDay;
@@ -114,4 +115,32 @@ export const isChristmasDay = function(inst) {
 
 function getDoMonthsMatch(instanceMonth, month) {
   return instanceMonth === month;
+}
+
+function getNthDayOfMonth({ n, day, month, year }) {
+  const firstDayOfMonth = DateTime.fromObject({
+    day: 1,
+    month,
+    year,
+  });
+
+  // is target day before or after first day
+  const offsetThreshold = firstDayOfMonth.weekday - day;
+  let offsetFromTargetDay = null;
+  if (offsetThreshold > 0) {
+    // get to target day if target is after first day
+    offsetFromTargetDay = ONE_WEEK - offsetThreshold;
+  } else {
+    // reverse threshold to get to target from first day
+    offsetFromTargetDay = offsetThreshold * -1;
+  }
+
+  const firstOccurenceOfTargetDay = firstDayOfMonth.plus({
+    days: offsetFromTargetDay,
+  });
+  const nthDay = firstOccurenceOfTargetDay.plus({
+    days: (n - 1) * ONE_WEEK,
+  });
+
+  return nthDay;
 }

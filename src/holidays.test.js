@@ -21,6 +21,33 @@ describe('isNewYearsDay()', () => {
   });
 });
 
+describe('isMLKDay()', () => {
+  it('knows a MLK Day of any year', () => {
+    const mlk2020 = DateTime.fromObject({ year: 2020, month: 1, day: 20 });
+    const mlk2024 = DateTime.fromObject({ year: 2024, month: 1, day: 15 });
+    const mlk2015 = DateTime.fromObject({ year: 2015, month: 1, day: 19 });
+    const mlk2017 = DateTime.fromObject({ year: 2017, month: 1, day: 16 });
+    const mlk2036 = DateTime.fromObject({ year: 2036, month: 1, day: 21 });
+    const mlkDays = [mlk2020, mlk2024, mlk2015, mlk2017, mlk2036];
+
+    mlkDays.forEach(day => {
+      expect(holidays.isMLKDay(day)).toEqual(true);
+    });
+  });
+
+  it('knows if a day is not mlk day', () => {
+    const someRandomDays = [
+      DateTime.fromObject({ month: 1, day: 13 }),
+      DateTime.fromObject({ month: 1, day: 3 }),
+      DateTime.fromObject({ month: 5, day: 23 }),
+    ];
+
+    someRandomDays.forEach(day => {
+      expect(holidays.isMLKDay(day)).toEqual(false);
+    });
+  });
+});
+
 describe('isMemorialDay()', () => {
   it('early returns false if a date time instance is not in may', () => {
     const dayInFeb = DateTime.fromObject({ month: 2, day: 3 });
@@ -47,7 +74,7 @@ describe('isMemorialDay()', () => {
 });
 
 describe('isEasterDay()', () => {
-  it('konws an Easter Day of any year', () => {
+  it('knows an Easter Day of any year', () => {
     const easter2019 = DateTime.fromObject({ year: 2019, month: 4, day: 21 });
     const easter2016 = DateTime.fromObject({ year: 2016, month: 3, day: 27 });
     const easter1988 = DateTime.fromObject({ year: 1988, month: 4, day: 3 });
