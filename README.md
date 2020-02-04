@@ -201,6 +201,7 @@ All built-in holiday matchers.
 | Name | Type | Description |
 | --- | --- | --- |
 | isNewYearsDay | <code>function</code> | A provided holiday matcher. |
+| isMLKDay | <code>function</code> | A provided holiday matcher. |
 | isEasterDay | <code>function</code> | A provided holiday matcher. |
 | isMemorialDay | <code>function</code> | A provided holiday matcher. |
 | isIndependanceDay | <code>function</code> | A provided holiday matcher. |
