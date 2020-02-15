@@ -64,11 +64,11 @@ DateTime.prototype.clearBusinessSetup = function() {
  * @method isHoliday
  * @returns {boolean}
  */
-DateTime.prototype.isHoliday = function() {
+DateTime.prototype.isHoliday = function(...args) {
   const holidayMatchers = this.holidayMatchers || DEFAULT_HOLIDAY_MATCHERS;
 
   const isDayAnyHoliday = holidayMatchers.some(holidayMatcher => {
-    return holidayMatcher(this);
+    return holidayMatcher(this, ...args);
   });
 
   return isDayAnyHoliday;
