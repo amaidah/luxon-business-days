@@ -73,6 +73,7 @@ DateTime.prototype.isHoliday = function(...args) {
 
   return isDayAnyHoliday;
 };
+DateTime.prototype.isHolyday = function() {};
 
 /**
  * Checks if DateTime instance is a business day.
