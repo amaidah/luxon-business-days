@@ -178,7 +178,7 @@ dt = dt.plusBusiness({ days: 2 }); // 7/9/19 - Tuesday (Skipped through Saturday
 <dt><a href="#clearBusinessSetup">clearBusinessSetup()</a> ⇐ <code>DateTime</code></dt>
 <dd><p>Clears business setup globally from all DateTime instances.</p>
 </dd>
-<dt><a href="#isHoliday">isHoliday()</a> ⇒ <code>boolean</code></dt>
+<dt><a href="#isHoliday">isHoliday([...args])</a> ⇒ <code>boolean</code></dt>
 <dd><p>Checks if DateTime instance is a holiday by checking against all holiday matchers.</p>
 </dd>
 <dt><a href="#isBusinessDay">isBusinessDay()</a> ⇒ <code>boolean</code></dt>
@@ -232,11 +232,16 @@ Clears business setup globally from all DateTime instances.
 **Extends**: <code>DateTime</code>  
 <a name="isHoliday"></a>
 
-## isHoliday() ⇒ <code>boolean</code>
+## isHoliday([...args]) ⇒ <code>boolean</code>
 Checks if DateTime instance is a holiday by checking against all holiday matchers.
 
 **Kind**: global function  
 **Extends**: <code>DateTime</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [...args] | <code>\*</code> | Any additional arguments to pass through to each holiday matcher. |
+
 <a name="isBusinessDay"></a>
 
 ## isBusinessDay() ⇒ <code>boolean</code>

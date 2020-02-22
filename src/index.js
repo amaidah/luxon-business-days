@@ -62,6 +62,7 @@ DateTime.prototype.clearBusinessSetup = function() {
  * Checks if DateTime instance is a holiday by checking against all holiday matchers.
  * @augments DateTime
  * @method isHoliday
+ * @param {...*} [args] - Any additional arguments to pass through to each holiday matcher.
  * @returns {boolean}
  */
 DateTime.prototype.isHoliday = function(...args) {
