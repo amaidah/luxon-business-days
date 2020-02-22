@@ -155,6 +155,43 @@ dt = dt.plusBusiness({ days: 2 }); // 7/9/19 - Tuesday (Skipped through Saturday
 // Now do what you normally would with a DateTime instance.
 ```
 
+Passing additional arguments to matchers:
+
+Perhaps you need to calculate regional holidays manually and want to pass extra information to your custom holiday matchers.
+
+```javascript
+import { DateTime } from 'luxon-business-days';
+
+/**
+ * @param {DateTime} - An instance of DateTime.
+ * @param {string} region - An example extra param.
+ * @param {Object} someStuff - An example extra param.
+ * @returns {boolean}
+ */
+const someCustomRegionalMatcher = (inst, region, someStuff) => {
+  // does some matching based on region and data in someStuff
+}
+
+/**
+ * @param {DateTime} - An instance of DateTime.
+ * @returns {boolean}
+ */
+const anotherCustomMatcher = inst => {
+  // does some matching, but doesn't need additional info
+}
+
+let dt = DateTime.local();
+const myHolidays = [
+  someCustomRegionalMatcher,
+  anotherCustomMatcher,
+];
+
+dt.setupBusiness({ holidayMatchers: myHolidays });
+
+// Pass any additional argument to all your matchers
+dt.isHoliday('middle-america', {some: 'stuff'});
+```
+
 ## Examples
 
 * [Display a range of delivery dates for a shipment](https://codesandbox.io/s/luxon-business-days-range-example-tmb1d).
@@ -178,7 +215,7 @@ dt = dt.plusBusiness({ days: 2 }); // 7/9/19 - Tuesday (Skipped through Saturday
 <dt><a href="#clearBusinessSetup">clearBusinessSetup()</a> ⇐ <code>DateTime</code></dt>
 <dd><p>Clears business setup globally from all DateTime instances.</p>
 </dd>
-<dt><a href="#isHoliday">isHoliday()</a> ⇒ <code>boolean</code></dt>
+<dt><a href="#isHoliday">isHoliday([...args])</a> ⇒ <code>boolean</code></dt>
 <dd><p>Checks if DateTime instance is a holiday by checking against all holiday matchers.</p>
 </dd>
 <dt><a href="#isBusinessDay">isBusinessDay()</a> ⇒ <code>boolean</code></dt>
@@ -232,11 +269,16 @@ Clears business setup globally from all DateTime instances.
 **Extends**: <code>DateTime</code>  
 <a name="isHoliday"></a>
 
-## isHoliday() ⇒ <code>boolean</code>
+## isHoliday([...args]) ⇒ <code>boolean</code>
 Checks if DateTime instance is a holiday by checking against all holiday matchers.
 
 **Kind**: global function  
 **Extends**: <code>DateTime</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [...args] | <code>\*</code> | Any additional arguments to pass through to each holiday matcher. |
+
 <a name="isBusinessDay"></a>
 
 ## isBusinessDay() ⇒ <code>boolean</code>

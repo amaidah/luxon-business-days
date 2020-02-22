@@ -112,6 +112,24 @@ describe('isHoliday()', () => {
       expect(dt.isHoliday()).toBe(isHoliday);
     });
   });
+
+  it('correctly passes all additional args to every holiday matchers', () => {
+    const monday = [2020, 2, 24];
+    const dt = DateTime.local(...monday);
+    const holidayMatcherSpys = [jest.fn(), jest.fn()];
+
+    dt.setupBusiness({
+      holidayMatchers: [...holidayMatcherSpys],
+    });
+
+    dt.isHoliday('anything', ['passed'], { as: 'args' });
+
+    holidayMatcherSpys.forEach(matcherSpy => {
+      expect(matcherSpy).toHaveBeenCalledWith(dt, 'anything', ['passed'], {
+        as: 'args',
+      });
+    });
+  });
 });
 
 describe('isBusinessDay()', () => {
