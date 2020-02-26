@@ -100,6 +100,8 @@ DateTime.prototype.plusBusiness = function({ days = ONE_DAY } = {}) {
     return dt;
   }
 
+  const isNegative = days < 0;
+
   let businessDaysLeftToAdd = Math.round(days);
 
   while (businessDaysLeftToAdd > 0) {
@@ -111,6 +113,10 @@ DateTime.prototype.plusBusiness = function({ days = ONE_DAY } = {}) {
   }
 
   return dt;
+};
+
+DateTime.prototype.minusBusiness = function({ days = ONE_DAY * -1 } = {}) {
+  return this.plusBusiness({ days: -days });
 };
 
 function clone(inst) {
