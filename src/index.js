@@ -100,10 +100,16 @@ DateTime.prototype.plusBusiness = function({ days = ONE_DAY } = {}) {
     return dt;
   }
 
-  let businessDaysLeftToAdd = Math.round(days);
+  const isNegative = days < 0;
+
+  let businessDaysLeftToAdd = isNegative
+    ? Math.round(-1 * days)
+    : Math.round(days);
 
   while (businessDaysLeftToAdd > 0) {
-    dt = dt.plus({ days: ONE_DAY });
+    const oneDayByDirection = isNegative ? -ONE_DAY : ONE_DAY;
+
+    dt = dt.plus({ days: oneDayByDirection });
 
     if (dt.isBusinessDay() && !dt.isHoliday()) {
       businessDaysLeftToAdd--;
@@ -111,6 +117,17 @@ DateTime.prototype.plusBusiness = function({ days = ONE_DAY } = {}) {
   }
 
   return dt;
+};
+
+/**
+ * Subtracts business days to an existing DateTime instance.
+ * @augments DateTime
+ * @method minusBusiness
+ * @param {number} [days=1] - The number of business days to subtract.
+ * @returns {DateTime}
+ */
+DateTime.prototype.minusBusiness = function({ days = ONE_DAY } = {}) {
+  return this.plusBusiness({ days: -days });
 };
 
 function clone(inst) {

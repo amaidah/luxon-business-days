@@ -151,6 +151,9 @@ let dt = DateTime.local(2019, 7, 3);
 
 dt = dt.plusBusiness(); // 7/5/19 - Friday
 dt = dt.plusBusiness({ days: 2 }); // 7/9/19 - Tuesday (Skipped through Saturday/Sunday)
+dt = dt.minusBusiness({ days: 2 }); // back to 7/5/19
+dt = dt.minusBusiness({ days: -2 }) // back to 7/9/19
+dt = dt.plusBusiness({ days: -2 }); // back to 7/5/19
 
 // Now do what you normally would with a DateTime instance.
 ```
@@ -223,6 +226,9 @@ dt.isHoliday('middle-america', {some: 'stuff'});
 </dd>
 <dt><a href="#plusBusiness">plusBusiness([days])</a> ⇒ <code>DateTime</code></dt>
 <dd><p>Adds business days to an existing DateTime instance.</p>
+</dd>
+<dt><a href="#minusBusiness">minusBusiness([days])</a> ⇒ <code>DateTime</code></dt>
+<dd><p>Subtracts business days to an existing DateTime instance.</p>
 </dd>
 </dl>
 
@@ -297,4 +303,16 @@ Adds business days to an existing DateTime instance.
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | [days] | <code>number</code> | <code>1</code> | The number of business days to add. |
+
+<a name="minusBusiness"></a>
+
+## minusBusiness([days]) ⇒ <code>DateTime</code>
+Subtracts business days to an existing DateTime instance.
+
+**Kind**: global function  
+**Extends**: <code>DateTime</code>  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [days] | <code>number</code> | <code>1</code> | The number of business days to subtract. |
 

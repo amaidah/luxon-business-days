@@ -212,7 +212,9 @@ describe('plusBusiness()', () => {
     const nextMondayAfterJuly4thAndWeekend = DateTime.local(2019, 7, 8);
     const wednesdayPlusBusinessDays = wednesday.plusBusiness({ days: 2 });
 
-    expect(+wednesdayPlusBusinessDays === +nextMondayAfterJuly4thAndWeekend);
+    expect(
+      +wednesdayPlusBusinessDays === +nextMondayAfterJuly4thAndWeekend
+    ).toBe(true);
   });
 
   it('knows how to add business days through holidays setup via config', () => {
@@ -224,7 +226,49 @@ describe('plusBusiness()', () => {
     const friday = DateTime.local(2019, 7, 5);
     const wednesdayPlusBusinessDays = dt.plusBusiness({ days: 2 });
 
-    expect(+wednesdayPlusBusinessDays === +friday);
+    expect(+wednesdayPlusBusinessDays === +friday).toBe(true);
+  });
+
+  it('knows how add a negative number of days (aka add days)', () => {
+    const wednesday = DateTime.local(2019, 7, 3);
+    const tuesday = DateTime.local(2019, 7, 2);
+    const dayBeforeWednesday = wednesday.plusBusiness({ days: -1 });
+
+    expect(+dayBeforeWednesday === +tuesday).toBe(true);
+  });
+
+  it('knows how to add negative business days through weekends', () => {
+    const tuesday = DateTime.local(2019, 8, 27);
+    const previousThursday = DateTime.local(2019, 8, 22);
+    const tuesdayMinusBusinessDays = tuesday.plusBusiness({ days: -3 });
+
+    expect(+tuesdayMinusBusinessDays === +previousThursday).toBe(true);
+  });
+});
+
+describe('minusBusiness()', () => {
+  it('knows how to subtract one business day by default if called with no arguments', () => {
+    const monday = DateTime.local(2019, 8, 26);
+    const friday = DateTime.local(2019, 8, 23);
+    const mondayMinusBusinessDay = monday.minusBusiness();
+
+    expect(+mondayMinusBusinessDay === +friday).toBe(true);
+  });
+
+  it('knows how to subtract business days through weekends', () => {
+    const tuesday = DateTime.local(2019, 8, 27);
+    const previousThursday = DateTime.local(2019, 8, 22);
+    const tuesdayMinusBusinessDays = tuesday.minusBusiness({ days: 3 });
+
+    expect(+tuesdayMinusBusinessDays === +previousThursday).toBe(true);
+  });
+
+  it('knows how to subtract negative business days (aka add days)', () => {
+    const thursday = DateTime.local(2019, 8, 22);
+    const nextTuesday = DateTime.local(2019, 8, 27);
+    const thursdayPlusBusinessDays = thursday.minusBusiness({ days: -3 });
+
+    expect(+thursdayPlusBusinessDays === +nextTuesday).toBe(true);
   });
 });
 
