@@ -224,6 +224,9 @@ dt.isHoliday('middle-america', {some: 'stuff'});
 <dt><a href="#plusBusiness">plusBusiness([days])</a> ⇒ <code>DateTime</code></dt>
 <dd><p>Adds business days to an existing DateTime instance.</p>
 </dd>
+<dt><a href="#minusBusiness">minusBusiness([days])</a> ⇒ <code>DateTime</code></dt>
+<dd><p>Subtracts business days to an existing DateTime instance.</p>
+</dd>
 </dl>
 
 <a name="availableHolidayMatchers"></a>
@@ -297,4 +300,16 @@ Adds business days to an existing DateTime instance.
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | [days] | <code>number</code> | <code>1</code> | The number of business days to add. |
+
+<a name="minusBusiness"></a>
+
+## minusBusiness([days]) ⇒ <code>DateTime</code>
+Subtracts business days to an existing DateTime instance.
+
+**Kind**: global function  
+**Extends**: <code>DateTime</code>  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [days] | <code>number</code> | <code>1</code> | The number of business days to subtract. |
 

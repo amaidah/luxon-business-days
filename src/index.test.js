@@ -228,6 +228,18 @@ describe('plusBusiness()', () => {
   });
 });
 
+describe('minusBusiness()', () => {
+  it('knows how to subtract one business day by default if called with no arguments', () => {
+    const monday = DateTime.local(2019, 8, 26);
+    const friday = DateTime.local(2019, 8, 23);
+    const mondayMinusBusinessDay = monday.minusBusiness();
+
+    console.log(mondayMinusBusinessDay.toString());
+
+    expect(+mondayMinusBusinessDay === +friday).toBe(true);
+  });
+});
+
 describe('clone()', () => {
   it('knows how to clone a DateTime instance', () => {
     const dt = DateTime.fromObject({ year: 2019 });
