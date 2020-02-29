@@ -151,6 +151,9 @@ let dt = DateTime.local(2019, 7, 3);
 
 dt = dt.plusBusiness(); // 7/5/19 - Friday
 dt = dt.plusBusiness({ days: 2 }); // 7/9/19 - Tuesday (Skipped through Saturday/Sunday)
+dt = dt.minusBusiness({ days: 2 }); // back to 7/5/19
+dt = dt.minusBusiness({ days: -2 }) // back to 7/9/19
+dt = dt.plusBusiness({ days: -2 }); // back to 7/5/19
 
 // Now do what you normally would with a DateTime instance.
 ```
