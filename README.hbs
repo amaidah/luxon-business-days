@@ -17,6 +17,8 @@ Inspired by [moment-business-days](https://github.com/kalmecak/moment-business-d
 
 ## Install
 
+### Via NPM
+
 Already using luxon:
 
 ```bash
@@ -38,6 +40,35 @@ yarn add luxon luxon-business-days
 ```javascript
 import { DateTime } from 'luxon-business-days';
 // Use DateTime as normal
+```
+
+### Via Browser Script
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/luxon@1.25.0/build/global/luxon.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/luxon-business-days/dist/index.js"></script>
+```
+
+Make sure `luxon` script is loaded before `luxon-business-days`. For production use, it is recommended to tag a version in the script url like so:
+
+```
+https://cdn.jsdelivr.net/npm/luxon-business-days@2.7.0/dist/index.js
+```
+
+```html
+<head> 
+  <script src="https://cdn.jsdelivr.net/npm/luxon@1.25.0/build/global/luxon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/luxon-business-days/dist/index.js"></script>
+</head> 
+
+<body> 
+  <script>
+    let dt = luxon.DateTime.local();
+    const nextBizDay = dt.plusBusiness();
+
+    console.log(nextBizDay.toLocaleString());
+  </script>
+</body> 
 ```
 
 ## Config
