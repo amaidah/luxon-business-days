@@ -1,8 +1,11 @@
 let DateTime;
 
+/* istanbul ignore next */
 if (typeof luxon === 'object' && typeof window !== 'undefined') {
+  /* istanbul ignore next */
   DateTime = luxon.DateTime;
 } else {
+  /* istanbul ignore next */
   DateTime = require('luxon').DateTime;
 }
 
