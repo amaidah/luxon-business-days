@@ -4,11 +4,12 @@ const nodeExternals = require('webpack-node-externals');
 module.exports = {
   mode: 'production',
   entry: './src/index.js',
-  target: 'node',
+  target: 'web',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js',
     libraryTarget: 'umd',
+    globalObject: 'this',
   },
   module: {
     rules: [

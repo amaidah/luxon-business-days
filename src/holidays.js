@@ -1,4 +1,13 @@
-import { DateTime } from 'luxon';
+let DateTime;
+
+/* istanbul ignore next */
+if (typeof luxon === 'object' && typeof window !== 'undefined') {
+  /* istanbul ignore next */
+  DateTime = luxon.DateTime;
+} else {
+  /* istanbul ignore next */
+  DateTime = require('luxon').DateTime;
+}
 
 import { getEasterMonthAndDay } from './helpers';
 import { MONTH, ONE_WEEK } from './constants';
