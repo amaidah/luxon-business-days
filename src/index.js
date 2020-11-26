@@ -35,10 +35,11 @@ import {
 DateTime.prototype.availableHolidayMatchers = holidays;
 
 /**
- * All available holiday helpers.
+ * Exposes all available holiday helpers to a DateTime instance.
  * @augments DateTime
  * @var {Object} availableHolidayHelpers
  * @property {function} getEasterMonthAndDay - A provided holiday helper function that can be helpful for custom holiday matchers.
+ * @see [holidayHelpers]{@link #module_holidayHelpers}
  */
 DateTime.prototype.availableHolidayHelpers = helpers;
 
