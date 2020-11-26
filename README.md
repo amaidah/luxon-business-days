@@ -232,6 +232,13 @@ dt.isHoliday('middle-america', {some: 'stuff'});
 
 ## API
 
+## Modules
+
+<dl>
+<dt><a href="#module_helpers">helpers</a></dt>
+<dd></dd>
+</dl>
+
 ## Members
 
 <dl>
@@ -265,6 +272,21 @@ dt.isHoliday('middle-america', {some: 'stuff'});
 <dd><p>Subtracts business days to an existing DateTime instance.</p>
 </dd>
 </dl>
+
+<a name="module_helpers"></a>
+
+## helpers
+<a name="module_helpers.getEasterMonthAndDay"></a>
+
+### helpers.getEasterMonthAndDay(year) ⇒ <code>Array</code>
+Returns the month and Day of Easter for a given year.
+
+**Kind**: static method of [<code>helpers</code>](#module_helpers)  
+**Returns**: <code>Array</code> - Returns the exact month and day via `[month, day]`.  
+
+| Param | Type |
+| --- | --- |
+| year | <code>number</code> | 
 
 <a name="availableHolidayMatchers"></a>
 

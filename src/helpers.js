@@ -1,3 +1,7 @@
+/**
+ * @module helpers
+ */
+
 /*
  * Based on
  * https://gist.github.com/johndyer/0dffbdd98c2046f41180c051f378f343
@@ -6,7 +10,6 @@
 
 /**
  * Returns the month and Day of Easter for a given year.
- * @method getEasterMonthAndDay
  * @param {number} year
  * @returns {Array} Returns the exact month and day via `[month, day]`.
  */

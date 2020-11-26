@@ -9,7 +9,7 @@
     "test:watch": "NODE_ENV=test jest --watch --coverage=false",
     "test:coverage": "NODE_ENV=test jest --collect-coverage",
     "test:ci": "jest --collect-coverage",
-    "docs": "jsdoc2md --template README.hbs --files src/index.js > README.md",
+    "docs": "jsdoc2md --template README.hbs --files src/*.js > README.md",
     "clean": "rimraf dist",
     "build": "webpack",
     "prepare": "npm run clean && npm run lint && npm run build"
