@@ -1,7 +1,13 @@
-/**
+/*
  * Based on
  * https://gist.github.com/johndyer/0dffbdd98c2046f41180c051f378f343
  * https://www.irt.org/articles/js052/index.htm
+ */
+
+/**
+ * Returns the month and Day of Easter for a given year.
+ * @param {number} year
+ * @returns {Array} - [month, day]
  */
 export function getEasterMonthAndDay(year) {
   var f = Math.floor,

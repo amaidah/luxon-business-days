@@ -238,6 +238,9 @@ dt.isHoliday('middle-america', {some: 'stuff'});
 <dt><a href="#availableHolidayMatchers">availableHolidayMatchers</a> : <code>Object</code></dt>
 <dd><p>All built-in holiday matchers.</p>
 </dd>
+<dt><a href="#availableHolidayHelpers">availableHolidayHelpers</a> : <code>Object</code></dt>
+<dd><p>All available holiday helpers.</p>
+</dd>
 </dl>
 
 ## Functions
@@ -283,6 +286,19 @@ All built-in holiday matchers.
 | isColumbusDay | <code>function</code> | A provided holiday matcher. |
 | isThanksgivingDay | <code>function</code> | A provided holiday matcher. |
 | isChristmasDay | <code>function</code> | A provided holiday matcher. |
+
+<a name="availableHolidayHelpers"></a>
+
+## availableHolidayHelpers : <code>Object</code>
+All available holiday helpers.
+
+**Kind**: global variable  
+**Extends**: <code>DateTime</code>  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| getEasterMonthAndDay | <code>function</code> | A provided holiday helper function for creating custom holiday matchers. |
 
 <a name="setupBusiness"></a>
 
