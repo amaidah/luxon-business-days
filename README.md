@@ -235,7 +235,7 @@ dt.isHoliday('middle-america', {some: 'stuff'});
 ## Modules
 
 <dl>
-<dt><a href="#module_helpers">helpers</a></dt>
+<dt><a href="#module_holidayHelpers">holidayHelpers</a></dt>
 <dd></dd>
 </dl>
 
@@ -246,7 +246,7 @@ dt.isHoliday('middle-america', {some: 'stuff'});
 <dd><p>All built-in holiday matchers.</p>
 </dd>
 <dt><a href="#availableHolidayHelpers">availableHolidayHelpers</a> : <code>Object</code></dt>
-<dd><p>All available holiday helpers.</p>
+<dd><p>Exposes all available holiday helpers to a DateTime instance.</p>
 </dd>
 </dl>
 
@@ -273,15 +273,15 @@ dt.isHoliday('middle-america', {some: 'stuff'});
 </dd>
 </dl>
 
-<a name="module_helpers"></a>
+<a name="module_holidayHelpers"></a>
 
-## helpers
-<a name="module_helpers.getEasterMonthAndDay"></a>
+## holidayHelpers
+<a name="module_holidayHelpers.getEasterMonthAndDay"></a>
 
-### helpers.getEasterMonthAndDay(year) ⇒ <code>Array</code>
+### holidayHelpers.getEasterMonthAndDay(year) ⇒ <code>Array</code>
 Returns the month and Day of Easter for a given year.
 
-**Kind**: static method of [<code>helpers</code>](#module_helpers)  
+**Kind**: static method of [<code>holidayHelpers</code>](#module_holidayHelpers)  
 **Returns**: <code>Array</code> - Returns the exact month and day via `[month, day]`.  
 
 | Param | Type |
@@ -312,10 +312,11 @@ All built-in holiday matchers.
 <a name="availableHolidayHelpers"></a>
 
 ## availableHolidayHelpers : <code>Object</code>
-All available holiday helpers.
+Exposes all available holiday helpers to a DateTime instance.
 
 **Kind**: global variable  
 **Extends**: <code>DateTime</code>  
+**See**: [holidayHelpers](#module_holidayHelpers)  
 **Properties**
 
 | Name | Type | Description |

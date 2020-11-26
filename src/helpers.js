@@ -1,5 +1,5 @@
 /**
- * @module helpers
+ * @module holidayHelpers
  */
 
 /*
@@ -9,9 +9,9 @@
  */
 
 /**
- * Returns the month and Day of Easter for a given year.
+ * Returns the month and day of Easter for a given year.
  * @param {number} year
- * @returns {Array} Returns the exact month and day via `[month, day]`.
+ * @returns {Array} Returns month and day via `[month, day]`.
  */
 export function getEasterMonthAndDay(year) {
   var f = Math.floor,
