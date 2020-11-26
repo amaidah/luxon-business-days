@@ -10,6 +10,7 @@ if (typeof luxon === 'object' && typeof window !== 'undefined') {
 }
 
 import * as holidays from './holidays';
+import * as helpers from './helpers';
 
 import {
   DEFAULT_BUSINESS_DAYS,
@@ -32,6 +33,14 @@ import {
  * @property {function} isChristmasDay - A provided holiday matcher.
  */
 DateTime.prototype.availableHolidayMatchers = holidays;
+
+/**
+ * All available holiday helpers.
+ * @augments DateTime
+ * @var {Object} availableHolidayHelpers
+ * @property {function} getEasterMonthAndDay - A provided holiday helper function that can be helpful for custom holiday matchers.
+ */
+DateTime.prototype.availableHolidayHelpers = helpers;
 
 /**
  * Sets up business days and holiday matchers globally for all DateTime instances.
