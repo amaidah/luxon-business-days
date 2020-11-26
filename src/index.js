@@ -36,7 +36,6 @@ DateTime.prototype.availableHolidayMatchers = holidays;
 
 /**
  * All available holiday helpers.
- * @namespace
  * @augments DateTime
  * @var {Object} availableHolidayHelpers
  * @property {function} getEasterMonthAndDay - A provided holiday helper function that can be helpful for custom holiday matchers.

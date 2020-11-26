@@ -6,8 +6,9 @@
 
 /**
  * Returns the month and Day of Easter for a given year.
+ * @method getEasterMonthAndDay
  * @param {number} year
- * @returns {Array} [month, day]
+ * @returns {Array} Returns the exact month and day via `[month, day]`.
  */
 export function getEasterMonthAndDay(year) {
   var f = Math.floor,
