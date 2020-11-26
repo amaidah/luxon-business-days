@@ -298,7 +298,7 @@ All available holiday helpers.
 
 | Name | Type | Description |
 | --- | --- | --- |
-| getEasterMonthAndDay | <code>function</code> | A provided holiday helper function for creating custom holiday matchers. |
+| getEasterMonthAndDay | <code>function</code> | A provided holiday helper function that can be helpful for custom holiday matchers. |
 
 <a name="setupBusiness"></a>
 
