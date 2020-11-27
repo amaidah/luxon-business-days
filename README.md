@@ -242,7 +242,7 @@ dt.isHoliday('middle-america', {some: 'stuff'});
 ## Functions
 
 <dl>
-<dt><a href="#getEasterMonthAndDay">getEasterMonthAndDay(year)</a> ⇒ <code>Array</code></dt>
+<dt><a href="#getEasterMonthAndDay">getEasterMonthAndDay(year)</a> ⇒ <code>Array.&lt;number&gt;</code></dt>
 <dd><p>Returns the month and day of Easter for a given year.</p>
 </dd>
 </dl>
@@ -362,11 +362,11 @@ Subtracts business days to an existing DateTime instance.
 
 <a name="getEasterMonthAndDay"></a>
 
-## getEasterMonthAndDay(year) ⇒ <code>Array</code>
+## getEasterMonthAndDay(year) ⇒ <code>Array.&lt;number&gt;</code>
 Returns the month and day of Easter for a given year.
 
 **Kind**: global function  
-**Returns**: <code>Array</code> - Returns month and day via `[month, day]`.  
+**Returns**: <code>Array.&lt;number&gt;</code> - Returns month and day via `[month, day]`.  
 
 | Param | Type |
 | --- | --- |
