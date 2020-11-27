@@ -1,5 +1,6 @@
+// TODO fix jsdoc generation of this. Something is marked right.
 /**
- * @module holidayHelpers
+ * @alias DateTime.prototype.availableHolidayHelpers
  */
 
 /*

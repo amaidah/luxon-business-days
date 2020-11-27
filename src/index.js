@@ -1,3 +1,6 @@
+/**
+ * @augments DateTime
+ */
 let DateTime;
 
 /* istanbul ignore next */
@@ -21,7 +24,7 @@ import {
 /**
  * All built-in holiday matchers.
  * @augments DateTime
- * @var {Object} availableHolidayMatchers
+ * @member {Object}
  * @property {function} isNewYearsDay - A provided holiday matcher.
  * @property {function} isMLKDay - A provided holiday matcher.
  * @property {function} isEasterDay - A provided holiday matcher.
@@ -37,16 +40,14 @@ DateTime.prototype.availableHolidayMatchers = holidays;
 /**
  * Exposes all available holiday helpers to a DateTime instance.
  * @augments DateTime
- * @var {Object} availableHolidayHelpers
+ * @member {Object}
  * @property {function} getEasterMonthAndDay - A provided holiday helper function that can be helpful for custom holiday matchers.
- * @see [holidayHelpers]{@link #module_holidayHelpers}
  */
 DateTime.prototype.availableHolidayHelpers = helpers;
 
 /**
  * Sets up business days and holiday matchers globally for all DateTime instances.
  * @augments DateTime
- * @method setupBusiness
  * @param {Array<number>} [businessDays=DEFAULT_BUSINESS_DAYS] - The working business days for the business.
  * @param {Array<function>} [holidayMatchers=DEFAULT_HOLIDAY_MATCHERS] - The holiday matchers used to check if a particular day is a holiday for the business.
  */
@@ -54,7 +55,7 @@ DateTime.prototype.setupBusiness = function({
   businessDays = DEFAULT_BUSINESS_DAYS,
   holidayMatchers = DEFAULT_HOLIDAY_MATCHERS,
 } = {}) {
-  /**
+  /*
    * luxon does not clone custom properties so to maintain
    * config access across new instances we add our config
    * to the chain as a workaround
@@ -70,7 +71,6 @@ DateTime.prototype.setupBusiness = function({
 /**
  * Clears business setup globally from all DateTime instances.
  * @augments DateTime
- * @method clearBusinessSetup
  */
 DateTime.prototype.clearBusinessSetup = function() {
   delete DateTime.prototype.businessDays;
@@ -80,7 +80,6 @@ DateTime.prototype.clearBusinessSetup = function() {
 /**
  * Checks if DateTime instance is a holiday by checking against all holiday matchers.
  * @augments DateTime
- * @method isHoliday
  * @param {...*} [args] - Any additional arguments to pass through to each holiday matcher.
  * @returns {boolean}
  */
@@ -97,7 +96,6 @@ DateTime.prototype.isHoliday = function(...args) {
 /**
  * Checks if DateTime instance is a business day.
  * @augments DateTime
- * @method isBusinessDay
  * @returns {boolean}
  */
 DateTime.prototype.isBusinessDay = function() {
@@ -109,7 +107,6 @@ DateTime.prototype.isBusinessDay = function() {
 /**
  * Adds business days to an existing DateTime instance.
  * @augments DateTime
- * @method plusBusiness
  * @param {number} [days=1] - The number of business days to add.
  * @returns {DateTime}
  */
@@ -141,7 +138,6 @@ DateTime.prototype.plusBusiness = function({ days = ONE_DAY } = {}) {
 /**
  * Subtracts business days to an existing DateTime instance.
  * @augments DateTime
- * @method minusBusiness
  * @param {number} [days=1] - The number of business days to subtract.
  * @returns {DateTime}
  */
