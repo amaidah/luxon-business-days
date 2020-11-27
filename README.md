@@ -232,69 +232,44 @@ dt.isHoliday('middle-america', {some: 'stuff'});
 
 ## API
 
-## Modules
-
-<dl>
-<dt><a href="#module_holidayHelpers">holidayHelpers</a></dt>
-<dd></dd>
-</dl>
-
 ## Members
 
 <dl>
-<dt><a href="#availableHolidayMatchers">availableHolidayMatchers</a> : <code>Object</code></dt>
-<dd><p>All built-in holiday matchers.</p>
-</dd>
-<dt><a href="#availableHolidayHelpers">availableHolidayHelpers</a> : <code>Object</code></dt>
-<dd><p>Exposes all available holiday helpers to a DateTime instance.</p>
-</dd>
+<dt><a href="#DateTime">DateTime</a> ⇐ <code><a href="#DateTime">DateTime</a></code></dt>
+<dd></dd>
 </dl>
 
 ## Functions
 
 <dl>
-<dt><a href="#setupBusiness">setupBusiness([businessDays], [holidayMatchers])</a> ⇐ <code>DateTime</code></dt>
-<dd><p>Sets up business days and holiday matchers globally for all DateTime instances.</p>
-</dd>
-<dt><a href="#clearBusinessSetup">clearBusinessSetup()</a> ⇐ <code>DateTime</code></dt>
-<dd><p>Clears business setup globally from all DateTime instances.</p>
-</dd>
-<dt><a href="#isHoliday">isHoliday([...args])</a> ⇒ <code>boolean</code></dt>
-<dd><p>Checks if DateTime instance is a holiday by checking against all holiday matchers.</p>
-</dd>
-<dt><a href="#isBusinessDay">isBusinessDay()</a> ⇒ <code>boolean</code></dt>
-<dd><p>Checks if DateTime instance is a business day.</p>
-</dd>
-<dt><a href="#plusBusiness">plusBusiness([days])</a> ⇒ <code>DateTime</code></dt>
-<dd><p>Adds business days to an existing DateTime instance.</p>
-</dd>
-<dt><a href="#minusBusiness">minusBusiness([days])</a> ⇒ <code>DateTime</code></dt>
-<dd><p>Subtracts business days to an existing DateTime instance.</p>
+<dt><a href="#getEasterMonthAndDay">getEasterMonthAndDay(year)</a> ⇒ <code>Array</code></dt>
+<dd><p>Returns the month and day of Easter for a given year.</p>
 </dd>
 </dl>
 
-<a name="module_holidayHelpers"></a>
+<a name="DateTime"></a>
 
-## holidayHelpers
-<a name="module_holidayHelpers.getEasterMonthAndDay"></a>
+## DateTime ⇐ [<code>DateTime</code>](#DateTime)
+**Kind**: global variable  
+**Extends**: [<code>DateTime</code>](#DateTime)  
 
-### holidayHelpers.getEasterMonthAndDay(year) ⇒ <code>Array</code>
-Returns the month and Day of Easter for a given year.
+* [DateTime](#DateTime) ⇐ [<code>DateTime</code>](#DateTime)
+    * [.availableHolidayMatchers](#DateTime+availableHolidayMatchers) : <code>Object</code>
+    * [.availableHolidayHelpers](#DateTime+availableHolidayHelpers) : <code>Object</code>
+    * [.setupBusiness([businessDays], [holidayMatchers])](#DateTime+setupBusiness) ⇐ [<code>DateTime</code>](#DateTime)
+    * [.clearBusinessSetup()](#DateTime+clearBusinessSetup) ⇐ [<code>DateTime</code>](#DateTime)
+    * [.isHoliday([...args])](#DateTime+isHoliday) ⇒ <code>boolean</code>
+    * [.isBusinessDay()](#DateTime+isBusinessDay) ⇒ <code>boolean</code>
+    * [.plusBusiness([days])](#DateTime+plusBusiness) ⇒ [<code>DateTime</code>](#DateTime)
+    * [.minusBusiness([days])](#DateTime+minusBusiness) ⇒ [<code>DateTime</code>](#DateTime)
 
-**Kind**: static method of [<code>holidayHelpers</code>](#module_holidayHelpers)  
-**Returns**: <code>Array</code> - Returns the exact month and day via `[month, day]`.  
+<a name="DateTime+availableHolidayMatchers"></a>
 
-| Param | Type |
-| --- | --- |
-| year | <code>number</code> | 
-
-<a name="availableHolidayMatchers"></a>
-
-## availableHolidayMatchers : <code>Object</code>
+### dateTime.availableHolidayMatchers : <code>Object</code>
 All built-in holiday matchers.
 
-**Kind**: global variable  
-**Extends**: <code>DateTime</code>  
+**Kind**: instance property of [<code>DateTime</code>](#DateTime)  
+**Extends**: [<code>DateTime</code>](#DateTime)  
 **Properties**
 
 | Name | Type | Description |
@@ -309,80 +284,91 @@ All built-in holiday matchers.
 | isThanksgivingDay | <code>function</code> | A provided holiday matcher. |
 | isChristmasDay | <code>function</code> | A provided holiday matcher. |
 
-<a name="availableHolidayHelpers"></a>
+<a name="DateTime+availableHolidayHelpers"></a>
 
-## availableHolidayHelpers : <code>Object</code>
+### dateTime.availableHolidayHelpers : <code>Object</code>
 Exposes all available holiday helpers to a DateTime instance.
 
-**Kind**: global variable  
-**Extends**: <code>DateTime</code>  
-**See**: [holidayHelpers](#module_holidayHelpers)  
+**Kind**: instance property of [<code>DateTime</code>](#DateTime)  
+**Extends**: [<code>DateTime</code>](#DateTime)  
 **Properties**
 
 | Name | Type | Description |
 | --- | --- | --- |
 | getEasterMonthAndDay | <code>function</code> | A provided holiday helper function that can be helpful for custom holiday matchers. |
 
-<a name="setupBusiness"></a>
+<a name="DateTime+setupBusiness"></a>
 
-## setupBusiness([businessDays], [holidayMatchers]) ⇐ <code>DateTime</code>
+### dateTime.setupBusiness([businessDays], [holidayMatchers]) ⇐ [<code>DateTime</code>](#DateTime)
 Sets up business days and holiday matchers globally for all DateTime instances.
 
-**Kind**: global function  
-**Extends**: <code>DateTime</code>  
+**Kind**: instance method of [<code>DateTime</code>](#DateTime)  
+**Extends**: [<code>DateTime</code>](#DateTime)  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | [businessDays] | <code>Array.&lt;number&gt;</code> | <code>DEFAULT_BUSINESS_DAYS</code> | The working business days for the business. |
 | [holidayMatchers] | <code>Array.&lt;function()&gt;</code> | <code>DEFAULT_HOLIDAY_MATCHERS</code> | The holiday matchers used to check if a particular day is a holiday for the business. |
 
-<a name="clearBusinessSetup"></a>
+<a name="DateTime+clearBusinessSetup"></a>
 
-## clearBusinessSetup() ⇐ <code>DateTime</code>
+### dateTime.clearBusinessSetup() ⇐ [<code>DateTime</code>](#DateTime)
 Clears business setup globally from all DateTime instances.
 
-**Kind**: global function  
-**Extends**: <code>DateTime</code>  
-<a name="isHoliday"></a>
+**Kind**: instance method of [<code>DateTime</code>](#DateTime)  
+**Extends**: [<code>DateTime</code>](#DateTime)  
+<a name="DateTime+isHoliday"></a>
 
-## isHoliday([...args]) ⇒ <code>boolean</code>
+### dateTime.isHoliday([...args]) ⇒ <code>boolean</code>
 Checks if DateTime instance is a holiday by checking against all holiday matchers.
 
-**Kind**: global function  
-**Extends**: <code>DateTime</code>  
+**Kind**: instance method of [<code>DateTime</code>](#DateTime)  
+**Extends**: [<code>DateTime</code>](#DateTime)  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | [...args] | <code>\*</code> | Any additional arguments to pass through to each holiday matcher. |
 
-<a name="isBusinessDay"></a>
+<a name="DateTime+isBusinessDay"></a>
 
-## isBusinessDay() ⇒ <code>boolean</code>
+### dateTime.isBusinessDay() ⇒ <code>boolean</code>
 Checks if DateTime instance is a business day.
 
-**Kind**: global function  
-**Extends**: <code>DateTime</code>  
-<a name="plusBusiness"></a>
+**Kind**: instance method of [<code>DateTime</code>](#DateTime)  
+**Extends**: [<code>DateTime</code>](#DateTime)  
+<a name="DateTime+plusBusiness"></a>
 
-## plusBusiness([days]) ⇒ <code>DateTime</code>
+### dateTime.plusBusiness([days]) ⇒ [<code>DateTime</code>](#DateTime)
 Adds business days to an existing DateTime instance.
 
-**Kind**: global function  
-**Extends**: <code>DateTime</code>  
+**Kind**: instance method of [<code>DateTime</code>](#DateTime)  
+**Extends**: [<code>DateTime</code>](#DateTime)  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | [days] | <code>number</code> | <code>1</code> | The number of business days to add. |
 
-<a name="minusBusiness"></a>
+<a name="DateTime+minusBusiness"></a>
 
-## minusBusiness([days]) ⇒ <code>DateTime</code>
+### dateTime.minusBusiness([days]) ⇒ [<code>DateTime</code>](#DateTime)
 Subtracts business days to an existing DateTime instance.
 
-**Kind**: global function  
-**Extends**: <code>DateTime</code>  
+**Kind**: instance method of [<code>DateTime</code>](#DateTime)  
+**Extends**: [<code>DateTime</code>](#DateTime)  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | [days] | <code>number</code> | <code>1</code> | The number of business days to subtract. |
+
+<a name="getEasterMonthAndDay"></a>
+
+## getEasterMonthAndDay(year) ⇒ <code>Array</code>
+Returns the month and day of Easter for a given year.
+
+**Kind**: global function  
+**Returns**: <code>Array</code> - Returns month and day via `[month, day]`.  
+
+| Param | Type |
+| --- | --- |
+| year | <code>number</code> | 
 
