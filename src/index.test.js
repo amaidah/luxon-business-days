@@ -1,9 +1,13 @@
+import { Settings } from 'luxon';
 import * as holidays from './holidays';
-import { DateTime, clone } from './index';
+import { DateTime } from './index';
 import { DEFAULT_BUSINESS_DAYS, DEFAULT_HOLIDAY_MATCHERS } from './defaults';
 
 beforeEach(() => {
   DateTime.prototype.clearBusinessSetup();
+
+  // moment.github.io/luxon/docs/manual/zones.html#changing-the-default-zone
+  https: Settings.defaultZoneName = 'local';
 });
 
 describe('availableHolidayMatchers', () => {
@@ -173,14 +177,14 @@ describe('isBusinessDay()', () => {
 });
 
 describe('plusBusiness()', () => {
-  it('returns a cloned instance if invalid', () => {
+  it('returns the original instance if invalid', () => {
     const invalid = DateTime.fromObject({ months: 13 });
     const nextDay = invalid.plusBusiness();
-    nextDay.c = 'should not equal invalid.c by reference';
+    nextDay.c = 'should be the same instance by reference';
 
     expect(nextDay.isValid).toBeFalsy();
     expect(nextDay).toBeInstanceOf(DateTime);
-    expect(nextDay.c).not.toEqual(invalid.c);
+    expect(nextDay.c).toEqual(invalid.c);
   });
 
   it('knows how to add one business day by default if called with no arguments', () => {
@@ -272,17 +276,51 @@ describe('minusBusiness()', () => {
   });
 });
 
-describe('clone()', () => {
-  it('knows how to clone a DateTime instance', () => {
-    const dt = DateTime.fromObject({ year: 2019 });
-    const copy = clone(dt);
+describe('time zone is carried over after a business-day operation', () => {
+  it('holds time zone after minusBusiness with excplicit setZone()', () => {
+    const ny = DateTime.utc().setZone('America/New_York');
+    const nyMinusThree = ny.minusBusiness({ days: 3 });
 
-    expect(+dt === +copy).toBe(true);
+    expect(ny.offset === nyMinusThree.offset);
+    expect(ny.zoneName === nyMinusThree.zoneName);
+    expect(nyMinusThree.zoneName).toBe('America/New_York');
+  });
 
-    copy.c.year = 2006;
+  it('holds time zone after plusBusiness() with excplicit setZone', () => {
+    const ny = DateTime.utc().setZone('America/New_York');
+    const nyPlusThree = ny.plusBusiness({ days: 3 });
 
-    expect(dt.year).not.toEqual(copy.year);
-    expect(dt.year).toEqual(2019);
-    expect(copy.year).toEqual(2006);
+    expect(ny.offset === nyPlusThree.offset);
+    expect(ny.zoneName === nyPlusThree.zoneName);
+    expect(nyPlusThree.zoneName).toBe('America/New_York');
+  });
+
+  it('overrides a defaultZone from Luxon Settings', () => {
+    Settings.defaultZoneName = 'America/Los_Angeles';
+
+    const utc = DateTime.fromObject({
+      year: 2020,
+      month: 12,
+      day: 6,
+      zone: 'utc',
+    });
+    const utcPlusTen = utc.plusBusiness({ dats: 10 });
+
+    expect(utc.zoneName === utcPlusTen.zoneName);
+    expect(utc.offset === utcPlusTen.offset);
+    expect(utcPlusTen.zoneName).toBe('UTC');
+  });
+
+  it('respects default zoning', () => {
+    // starts out local
+    expect(Settings.defaultZoneName).toBe(DateTime.local().zoneName);
+
+    Settings.defaultZoneName = 'America/New_York';
+
+    const ny = DateTime.local();
+    const nyPlusTwo = ny.plusBusiness({ days: 2 });
+
+    expect(ny.zoneName).toBe('America/New_York');
+    expect(nyPlusTwo.zoneName).toBe('America/New_York');
   });
 });
