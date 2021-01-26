@@ -111,7 +111,8 @@ DateTime.prototype.isBusinessDay = function() {
  * @returns {DateTime}
  */
 DateTime.prototype.plusBusiness = function({ days = ONE_DAY } = {}) {
-  let dt = clone(this);
+  let dt = this;
+
   if (!dt.isValid) {
     return dt;
   }
@@ -145,8 +146,4 @@ DateTime.prototype.minusBusiness = function({ days = ONE_DAY } = {}) {
   return this.plusBusiness({ days: -days });
 };
 
-function clone(inst) {
-  return new DateTime(Object.assign({}, inst));
-}
-
-export { DateTime, clone };
+export { DateTime };
