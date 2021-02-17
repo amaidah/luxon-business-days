@@ -327,7 +327,9 @@ describe('time zone is carried over after a business-day operation', () => {
 
 describe('business day diff', () => {
   it('knows two identical DateTimes have a business day diff of 0', () => {
-    const targetDate = DateTime.local().plus({ hours: 2 });
+    const targetDate = DateTime.fromMillis(new Date().setHours(0, 0))
+      .setLocale('America/New_York')
+      .plus({ hours: 2 });
 
     expect(DateTime.local().businessDiff(targetDate)).toEqual(0);
   });
