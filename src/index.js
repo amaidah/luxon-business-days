@@ -146,4 +146,39 @@ DateTime.prototype.minusBusiness = function({ days = ONE_DAY } = {}) {
   return this.plusBusiness({ days: -days });
 };
 
+/**
+ * Returns the difference in business days.  Set relative to true if you need to support past dates.
+ * @param {DateTime} targetDate
+ * @param {boolean} relative
+ * @returns {number}
+ */
+DateTime.prototype.businessDiff = function(targetDate, relative = false) {
+  let dt = this;
+  let start = dt < targetDate ? dt : targetDate;
+  let end = dt < targetDate ? targetDate : dt;
+  let daysDiff = 0;
+  let isSameDay =
+    dt.hasSame(targetDate, 'day') &&
+    dt.hasSame(targetDate, 'month') &&
+    dt.hasSame(targetDate, 'year');
+
+  if (isSameDay) {
+    return daysDiff;
+  }
+
+  while (start < end) {
+    if (start.isBusinessDay() && !start.isHoliday()) {
+      daysDiff += 1;
+    }
+
+    start = start.plus({ days: 1 });
+  }
+
+  if (relative) {
+    return dt <= targetDate ? daysDiff : -daysDiff;
+  }
+
+  return daysDiff;
+};
+
 export { DateTime };

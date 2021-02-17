@@ -264,6 +264,7 @@ dt.isHoliday('middle-america', {some: 'stuff'});
     * [.isBusinessDay()](#DateTime+isBusinessDay) ⇒ <code>boolean</code>
     * [.plusBusiness([days])](#DateTime+plusBusiness) ⇒ [<code>DateTime</code>](#DateTime)
     * [.minusBusiness([days])](#DateTime+minusBusiness) ⇒ [<code>DateTime</code>](#DateTime)
+    * [.businessDiff(targetDate, relative)](#DateTime+businessDiff) ⇒ <code>number</code>
 
 <a name="DateTime+availableHolidayMatchers"></a>
 
@@ -361,6 +362,18 @@ Subtracts business days to an existing DateTime instance.
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | [days] | <code>number</code> | <code>1</code> | The number of business days to subtract. |
+
+<a name="DateTime+businessDiff"></a>
+
+### dateTime.businessDiff(targetDate, relative) ⇒ <code>number</code>
+Returns the difference in business days.  Set relative to true if you need to support past dates.
+
+**Kind**: instance method of [<code>DateTime</code>](#DateTime)  
+
+| Param | Type |
+| --- | --- |
+| targetDate | [<code>DateTime</code>](#DateTime) | 
+| relative | <code>boolean</code> | 
 
 <a name="getEasterMonthAndDay"></a>
 

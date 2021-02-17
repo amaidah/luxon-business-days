@@ -324,3 +324,39 @@ describe('time zone is carried over after a business-day operation', () => {
     expect(nyPlusTwo.zoneName).toBe('America/New_York');
   });
 });
+
+describe('business day diff', () => {
+  it('knows two identical DateTimes have a business day diff of 0', () => {
+    const targetDate = DateTime.local().plus({ hours: 2 });
+
+    expect(DateTime.local().businessDiff(targetDate)).toEqual(0);
+  });
+
+  it('knows there are three business days between two dates that are 3 business days apart', () => {
+    const myCompanyTakesNoHolidays = [];
+    const startDate = DateTime.local();
+    const futureDate = DateTime.local().plusBusiness({ days: 3 });
+    const pastDate = DateTime.local().minusBusiness({ days: 3 });
+
+    startDate.setupBusiness({
+      holidayMatchers: myCompanyTakesNoHolidays,
+    });
+
+    expect(startDate.businessDiff(futureDate)).toEqual(3);
+    expect(startDate.businessDiff(pastDate)).toEqual(3);
+  });
+
+  it('knows diff is negative for the past and positive for the future if relative is specified', () => {
+    const myCompanyTakesNoHolidays = [];
+    const startDate = DateTime.local();
+    const futureDate = DateTime.local().plusBusiness({ days: 3 });
+    const pastDate = DateTime.local().minusBusiness({ days: 3 });
+
+    startDate.setupBusiness({
+      holidayMatchers: myCompanyTakesNoHolidays,
+    });
+
+    expect(startDate.businessDiff(futureDate, true)).toEqual(3);
+    expect(startDate.businessDiff(pastDate, true)).toEqual(-3);
+  });
+});
