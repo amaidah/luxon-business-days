@@ -327,8 +327,8 @@ describe('time zone is carried over after a business-day operation', () => {
 
 describe('business day diff', () => {
   it('knows two identical DateTimes have a business day diff of 0', () => {
-    const targetDate = DateTime.fromMillis(new Date().setHours(0, 0))
-      .setLocale('America/New_York')
+    const targetDate = DateTime.local()
+      .startOf('day')
       .plus({ hours: 2 });
 
     expect(DateTime.local().businessDiff(targetDate)).toEqual(0);
@@ -336,9 +336,9 @@ describe('business day diff', () => {
 
   it('knows there are three business days between two dates that are 3 business days apart', () => {
     const myCompanyTakesNoHolidays = [];
-    const startDate = DateTime.local();
-    const futureDate = DateTime.local().plusBusiness({ days: 3 });
-    const pastDate = DateTime.local().minusBusiness({ days: 3 });
+    const startDate = DateTime.local().startOf('day');
+    const futureDate = startDate.plusBusiness({ days: 3 });
+    const pastDate = startDate.minusBusiness({ days: 3 });
 
     startDate.setupBusiness({
       holidayMatchers: myCompanyTakesNoHolidays,
@@ -350,9 +350,9 @@ describe('business day diff', () => {
 
   it('knows diff is negative for the past and positive for the future if relative is specified', () => {
     const myCompanyTakesNoHolidays = [];
-    const startDate = DateTime.local();
-    const futureDate = DateTime.local().plusBusiness({ days: 3 });
-    const pastDate = DateTime.local().minusBusiness({ days: 3 });
+    const startDate = DateTime.local().startOf('day');
+    const futureDate = startDate.plusBusiness({ days: 3 });
+    const pastDate = startDate.minusBusiness({ days: 3 });
 
     startDate.setupBusiness({
       holidayMatchers: myCompanyTakesNoHolidays,
