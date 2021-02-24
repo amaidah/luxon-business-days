@@ -166,7 +166,7 @@ DateTime.prototype.businessDiff = function(targetDate, relative = false) {
     return daysDiff;
   }
 
-  while (start <= end) {
+  while (start < end) {
     if (start.isBusinessDay() && !start.isHoliday()) {
       daysDiff += 1;
     }
