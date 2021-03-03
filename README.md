@@ -373,7 +373,7 @@ Subtracts business days to an existing DateTime instance.
 <a name="DateTime+businessDiff"></a>
 
 ### dateTime.businessDiff(targetDate, config) ⇒ <code>number</code>
-Returns the difference in business days.  Set relative to true if you need to support past dates.
+Returns the difference in business days.
 
 **Kind**: instance method of [<code>DateTime</code>](#DateTime)  
 

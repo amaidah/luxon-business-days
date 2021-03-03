@@ -153,7 +153,7 @@ DateTime.prototype.minusBusiness = function({ days = ONE_DAY } = {}) {
  */
 
 /**
- * Returns the difference in business days.  Set relative to true if you need to support past dates.
+ * Returns the difference in business days.
  * @param {DateTime} targetDate
  * @param {BusinessDiffConfig} config
  * @returns {number}
