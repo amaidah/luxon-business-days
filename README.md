@@ -402,6 +402,6 @@ Returns the month and day of Easter for a given year.
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| [includeEndDate] | <code>boolean</code> | <code>false</code> | includeEndDate |
-| [relative] | <code>boolean</code> | <code>false</code> | relative |
+| [includeEndDate] | <code>boolean</code> | <code>false</code> | include the end date in the calculation |
+| [relative] | <code>boolean</code> | <code>false</code> | signs the return value as negative if end date is in the past |
 
