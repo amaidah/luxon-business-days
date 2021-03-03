@@ -334,7 +334,7 @@ describe('business day diff', () => {
     expect(DateTime.local().businessDiff(targetDate)).toEqual(0);
   });
 
-  it('knows there are three business days between two dates that are 3 business days apart', () => {
+  it('knows there are 3 business days between two dates that are 3 business days apart', () => {
     const myCompanyTakesNoHolidays = [];
     const startDate = DateTime.local().startOf('day');
     const futureDate = startDate.plusBusiness({ days: 3 });
@@ -358,7 +358,25 @@ describe('business day diff', () => {
       holidayMatchers: myCompanyTakesNoHolidays,
     });
 
-    expect(startDate.businessDiff(futureDate, true)).toEqual(3);
-    expect(startDate.businessDiff(pastDate, true)).toEqual(-3);
+    const config = { relative: true };
+
+    expect(startDate.businessDiff(futureDate, config)).toEqual(3);
+    expect(startDate.businessDiff(pastDate, config)).toEqual(-3);
+  });
+
+  it('knows there are 4 business days between two dates that are 3 business days apart but include the end date', () => {
+    const myCompanyTakesNoHolidays = [];
+    const startDate = DateTime.local().startOf('day');
+    const futureDate = startDate.plusBusiness({ days: 3 });
+    const pastDate = startDate.minusBusiness({ days: 3 });
+
+    startDate.setupBusiness({
+      holidayMatchers: myCompanyTakesNoHolidays,
+    });
+
+    const config = { includeEndDate: true };
+
+    expect(startDate.businessDiff(futureDate, config)).toEqual(4);
+    expect(startDate.businessDiff(pastDate, config)).toEqual(4);
   });
 });

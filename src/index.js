@@ -149,14 +149,20 @@ DateTime.prototype.minusBusiness = function({ days = ONE_DAY } = {}) {
 /**
  * Returns the difference in business days.  Set relative to true if you need to support past dates.
  * @param {DateTime} targetDate
- * @param {boolean} relative
+ * @typedef BusinessDiffConfig
+ *  @property {boolean} [includeEndDate=false] includeEndDate
+ *  @property {boolean} [relative=false] relative
+ * @param {BusinessDiffConfig} config
  * @returns {number}
  */
-DateTime.prototype.businessDiff = function(targetDate, relative = false) {
+DateTime.prototype.businessDiff = function(
+  targetDate,
+  { includeEndDate = false, relative = false } = {}
+) {
   let dt = this;
   let start = dt < targetDate ? dt : targetDate;
   let end = dt < targetDate ? targetDate : dt;
-  let daysDiff = 0;
+  let daysDiff = includeEndDate ? 1 : 0;
   let isSameDay =
     dt.hasSame(targetDate, 'day') &&
     dt.hasSame(targetDate, 'month') &&

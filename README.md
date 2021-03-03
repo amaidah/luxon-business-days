@@ -249,6 +249,14 @@ dt.isHoliday('middle-america', {some: 'stuff'});
 </dd>
 </dl>
 
+## Typedefs
+
+<dl>
+<dt><a href="#BusinessDiffConfig">BusinessDiffConfig</a> ⇒ <code>number</code></dt>
+<dd><p>Returns the difference in business days.  Set relative to true if you need to support past dates.</p>
+</dd>
+</dl>
+
 <a name="DateTime"></a>
 
 ## DateTime ⇐ [<code>DateTime</code>](#DateTime)
@@ -264,7 +272,6 @@ dt.isHoliday('middle-america', {some: 'stuff'});
     * [.isBusinessDay()](#DateTime+isBusinessDay) ⇒ <code>boolean</code>
     * [.plusBusiness([days])](#DateTime+plusBusiness) ⇒ [<code>DateTime</code>](#DateTime)
     * [.minusBusiness([days])](#DateTime+minusBusiness) ⇒ [<code>DateTime</code>](#DateTime)
-    * [.businessDiff(targetDate, relative)](#DateTime+businessDiff) ⇒ <code>number</code>
 
 <a name="DateTime+availableHolidayMatchers"></a>
 
@@ -363,18 +370,6 @@ Subtracts business days to an existing DateTime instance.
 | --- | --- | --- | --- |
 | [days] | <code>number</code> | <code>1</code> | The number of business days to subtract. |
 
-<a name="DateTime+businessDiff"></a>
-
-### dateTime.businessDiff(targetDate, relative) ⇒ <code>number</code>
-Returns the difference in business days.  Set relative to true if you need to support past dates.
-
-**Kind**: instance method of [<code>DateTime</code>](#DateTime)  
-
-| Param | Type |
-| --- | --- |
-| targetDate | [<code>DateTime</code>](#DateTime) | 
-| relative | <code>boolean</code> | 
-
 <a name="getEasterMonthAndDay"></a>
 
 ## getEasterMonthAndDay(year) ⇒ <code>Array.&lt;number&gt;</code>
@@ -386,4 +381,23 @@ Returns the month and day of Easter for a given year.
 | Param | Type |
 | --- | --- |
 | year | <code>number</code> | 
+
+<a name="BusinessDiffConfig"></a>
+
+## BusinessDiffConfig ⇒ <code>number</code>
+Returns the difference in business days.  Set relative to true if you need to support past dates.
+
+**Kind**: global typedef  
+
+| Param | Type |
+| --- | --- |
+| targetDate | [<code>DateTime</code>](#DateTime) | 
+| config | [<code>BusinessDiffConfig</code>](#BusinessDiffConfig) | 
+
+**Properties**
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| [includeEndDate] | <code>boolean</code> | <code>false</code> | includeEndDate |
+| [relative] | <code>boolean</code> | <code>false</code> | relative |
 
