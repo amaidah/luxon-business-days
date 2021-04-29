@@ -327,16 +327,14 @@ describe('time zone is carried over after a business-day operation', () => {
 
 describe('diffBusiness()', () => {
   it('knows two identical DateTimes have a business day diff of 0', () => {
-    const targetDate = DateTime.local()
-      .startOf('day')
-      .plus({ hours: 2 });
+    const targetDate = DateTime.local().plus({ hours: 2 });
 
     expect(DateTime.local().diffBusiness(targetDate)).toEqual(0);
   });
 
   it('knows there are 3 business days between two dates that are 3 business days apart', () => {
     const myCompanyTakesNoHolidays = [];
-    const startDate = DateTime.local().startOf('day');
+    const startDate = DateTime.local();
     const futureDate = startDate.plusBusiness({ days: 3 });
     const pastDate = startDate.minusBusiness({ days: 3 });
 
@@ -350,7 +348,7 @@ describe('diffBusiness()', () => {
 
   it('knows diff is negative for the past and positive for the future if relative is specified', () => {
     const myCompanyTakesNoHolidays = [];
-    const startDate = DateTime.local().startOf('day');
+    const startDate = DateTime.local();
     const futureDate = startDate.plusBusiness({ days: 3 });
     const pastDate = startDate.minusBusiness({ days: 3 });
 
@@ -366,7 +364,7 @@ describe('diffBusiness()', () => {
 
   it('knows there are 4 business days between two dates that are 3 business days apart but include the end date', () => {
     const myCompanyTakesNoHolidays = [];
-    const startDate = DateTime.local().startOf('day');
+    const startDate = DateTime.local();
     const futureDate = startDate.plusBusiness({ days: 3 });
     const pastDate = startDate.minusBusiness({ days: 3 });
 
