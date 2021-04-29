@@ -325,7 +325,7 @@ describe('time zone is carried over after a business-day operation', () => {
   });
 });
 
-describe('business day diff', () => {
+describe('diffBusiness()', () => {
   it('knows two identical DateTimes have a business day diff of 0', () => {
     const targetDate = DateTime.local()
       .startOf('day')
