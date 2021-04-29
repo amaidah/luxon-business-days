@@ -158,7 +158,7 @@ DateTime.prototype.minusBusiness = function({ days = ONE_DAY } = {}) {
  * @param {BusinessDiffConfig} config
  * @returns {number}
  */
-DateTime.prototype.businessDiff = function(
+DateTime.prototype.diffBusiness = function(
   targetDate,
   { includeEndDate = false, relative = false } = {}
 ) {
