@@ -165,7 +165,9 @@ DateTime.prototype.diffBusiness = function(
   let dt = this;
   let start = dt < targetDate ? dt : targetDate;
   let end = dt < targetDate ? targetDate : dt;
-  let daysDiff = includeEndDate ? 1 : 0;
+  let daysDiff = Number(
+    includeEndDate && end.isBusinessDay() && !end.isHoliday()
+  );
   let isSameDay =
     dt.hasSame(targetDate, 'day') &&
     dt.hasSame(targetDate, 'month') &&
