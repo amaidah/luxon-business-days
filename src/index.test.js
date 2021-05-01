@@ -332,7 +332,7 @@ describe('diffBusiness()', () => {
   it('knows two identical DateTimes have a business day diff of 0', () => {
     const targetDate = defaultStartDate.startOf('day').plus({ hours: 2 });
 
-    expect(DateTime.local().diffBusiness(targetDate)).toEqual(0);
+    expect(defaultStartDate.diffBusiness(targetDate)).toEqual(0);
   });
 
   it('knows there are 3 business days between two dates that are 3 business days apart', () => {
