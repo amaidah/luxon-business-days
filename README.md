@@ -148,7 +148,7 @@ import { DateTime } from 'luxon-business-days';
  * @returns {boolean}
  */
 const isCelebratingKobe = function(inst) {
-  // Celebrate the day Kobe died
+  // Commemorate the day Kobe died
   const kobeRIP = DateTime.fromObject({ month: 1, day: 26 });
 
   // Celebrate Kobe Day
