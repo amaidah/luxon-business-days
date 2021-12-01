@@ -32,7 +32,10 @@ export const isMLKDay = function(inst) {
     year: inst.year,
   });
 
-  return +inst === +mlkDay;
+  const matchesMonth = inst.month === mlkDay.month;
+  const matchesDay = inst.day === mlkDay.day;
+
+  return matchesMonth && matchesDay;
 };
 
 // first Sunday after the Full Moon date, that falls on or after March 21
@@ -48,7 +51,10 @@ export const isEasterDay = function(inst) {
     day: easterDayForInstanceYear,
   });
 
-  return +inst === +easterDay;
+  const matchesMonth = inst.month === easterDay.month;
+  const matchesDay = inst.day === easterDay.day;
+
+  return matchesMonth && matchesDay;
 };
 
 // last Monday of May
@@ -68,7 +74,10 @@ export const isMemorialDay = function(inst) {
   const weekday = lastDayInMay.weekday;
   const memorialDay = lastDayInMay.minus({ days: weekday - 1 });
 
-  return +inst === +memorialDay;
+  const matchesMonth = inst.month === memorialDay.month;
+  const matchesDay = inst.day === memorialDay.day;
+
+  return matchesMonth && matchesDay;
 };
 
 export const isIndependanceDay = function(inst) {
@@ -92,11 +101,14 @@ export const isLaborDay = function(inst) {
   });
   const weekday = firstDayInSeptember.weekday;
   const isFirstDayLaborDay = weekday === 1;
-  const memorialDay = isFirstDayLaborDay
+  const laborDay = isFirstDayLaborDay
     ? firstDayInSeptember
     : firstDayInSeptember.plus({ days: 8 - weekday });
 
-  return +inst === +memorialDay;
+  const matchesMonth = inst.month === laborDay.month;
+  const matchesDay = inst.day === laborDay.day;
+
+  return matchesMonth && matchesDay;
 };
 
 // second Monday of October
@@ -112,7 +124,10 @@ export const isColumbusDay = function(inst) {
     year: inst.year,
   });
 
-  return +inst === +columbusDay;
+  const matchesMonth = inst.month === columbusDay.month;
+  const matchesDay = inst.day === columbusDay.day;
+
+  return matchesMonth && matchesDay;
 };
 
 // fourth Thursday in November
@@ -128,7 +143,10 @@ export const isThanksgivingDay = function(inst) {
     year: inst.year,
   });
 
-  return +inst === +thanksgivingDay;
+  const matchesMonth = inst.month === thanksgivingDay.month;
+  const matchesDay = inst.day === thanksgivingDay.day;
+
+  return matchesMonth && matchesDay;
 };
 
 export const isChristmasDay = function(inst) {
