@@ -1,4 +1,4 @@
-import { Settings } from 'luxon';
+import { Settings, IANAZone } from 'luxon';
 import * as holidays from './holidays';
 import { DateTime } from './index';
 import { DEFAULT_BUSINESS_DAYS, DEFAULT_HOLIDAY_MATCHERS } from './defaults';
@@ -7,7 +7,7 @@ beforeEach(() => {
   DateTime.prototype.clearBusinessSetup();
 
   // moment.github.io/luxon/docs/manual/zones.html#changing-the-default-zone
-  https: Settings.defaultZoneName = 'local';
+  https: Settings.defaultZone = IANAZone.create(DateTime.local().zoneName);
 });
 
 describe('availableHolidayMatchers', () => {
@@ -178,7 +178,7 @@ describe('isBusinessDay()', () => {
 
 describe('plusBusiness()', () => {
   it('returns the original instance if invalid', () => {
-    const invalid = DateTime.fromObject({ months: 13 });
+    const invalid = DateTime.fromObject({ months: 13 }, {});
     const nextDay = invalid.plusBusiness();
     nextDay.c = 'should be the same instance by reference';
 
@@ -296,14 +296,16 @@ describe('time zone is carried over after a business-day operation', () => {
   });
 
   it('overrides a defaultZone from Luxon Settings', () => {
-    Settings.defaultZoneName = 'America/Los_Angeles';
+    Settings.defaultZone = 'America/Los_Angeles';
 
-    const utc = DateTime.fromObject({
-      year: 2020,
-      month: 12,
-      day: 6,
-      zone: 'utc',
-    });
+    const utc = DateTime.fromObject(
+      {
+        year: 2020,
+        month: 12,
+        day: 6,
+      },
+      { zone: 'utc' }
+    );
     const utcPlusTen = utc.plusBusiness({ dats: 10 });
 
     expect(utc.zoneName === utcPlusTen.zoneName);
@@ -313,9 +315,11 @@ describe('time zone is carried over after a business-day operation', () => {
 
   it('respects default zoning', () => {
     // starts out local
-    expect(Settings.defaultZoneName).toBe(DateTime.local().zoneName);
+    expect(Settings.defaultZone).toEqual(
+      IANAZone.create(DateTime.local().zoneName)
+    );
 
-    Settings.defaultZoneName = 'America/New_York';
+    Settings.defaultZone = 'America/New_York';
 
     const ny = DateTime.local();
     const nyPlusTwo = ny.plusBusiness({ days: 2 });
