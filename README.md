@@ -231,6 +231,7 @@ dt.isHoliday('middle-america', {some: 'stuff'});
 ## Examples
 
 * [Display a range of delivery dates for a shipment](https://codesandbox.io/s/luxon-business-days-range-example-tmb1d).
+* [Add custom holiday matchers to extend a holiday](https://codesandbox.io/s/luxon-business-days-holiday-ovveride-example-b18v5i)
 
 ## API
 
