@@ -146,4 +146,50 @@ DateTime.prototype.minusBusiness = function({ days = ONE_DAY } = {}) {
   return this.plusBusiness({ days: -days });
 };
 
+/**
+ * @typedef DiffBusinessConfig
+ * @property {boolean} [includeEndDate=false] - include the end date in the calculation
+ * @property {boolean} [relative=false] - signs the return value as negative if end date is in the past
+ */
+
+/**
+ * Returns the difference in business days.
+ * @param {DateTime} targetDate
+ * @param {DiffBusinessConfig} config
+ * @returns {number}
+ */
+DateTime.prototype.diffBusiness = function(
+  targetDate,
+  { includeEndDate = false, relative = false } = {}
+) {
+  let dt = this;
+  let start = dt < targetDate ? dt : targetDate;
+  let end = dt < targetDate ? targetDate : dt;
+  let daysDiff = Number(
+    includeEndDate && end.isBusinessDay() && !end.isHoliday()
+  );
+  let isSameDay =
+    dt.hasSame(targetDate, 'day') &&
+    dt.hasSame(targetDate, 'month') &&
+    dt.hasSame(targetDate, 'year');
+
+  if (isSameDay) {
+    return daysDiff;
+  }
+
+  while (start < end) {
+    if (start.isBusinessDay() && !start.isHoliday()) {
+      daysDiff += 1;
+    }
+
+    start = start.plus({ days: 1 });
+  }
+
+  if (relative) {
+    return dt <= targetDate ? daysDiff : -daysDiff;
+  }
+
+  return daysDiff;
+};
+
 export { DateTime };

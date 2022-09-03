@@ -250,6 +250,13 @@ dt.isHoliday('middle-america', {some: 'stuff'});
 </dd>
 </dl>
 
+## Typedefs
+
+<dl>
+<dt><a href="#DiffBusinessConfig">DiffBusinessConfig</a></dt>
+<dd></dd>
+</dl>
+
 <a name="DateTime"></a>
 
 ## DateTime ⇐ [<code>DateTime</code>](#DateTime)
@@ -265,6 +272,7 @@ dt.isHoliday('middle-america', {some: 'stuff'});
     * [.isBusinessDay()](#DateTime+isBusinessDay) ⇒ <code>boolean</code>
     * [.plusBusiness([days])](#DateTime+plusBusiness) ⇒ [<code>DateTime</code>](#DateTime)
     * [.minusBusiness([days])](#DateTime+minusBusiness) ⇒ [<code>DateTime</code>](#DateTime)
+    * [.diffBusiness(targetDate, config)](#DateTime+diffBusiness) ⇒ <code>number</code>
 
 <a name="DateTime+availableHolidayMatchers"></a>
 
@@ -363,6 +371,18 @@ Subtracts business days to an existing DateTime instance.
 | --- | --- | --- | --- |
 | [days] | <code>number</code> | <code>1</code> | The number of business days to subtract. |
 
+<a name="DateTime+diffBusiness"></a>
+
+### dateTime.diffBusiness(targetDate, config) ⇒ <code>number</code>
+Returns the difference in business days.
+
+**Kind**: instance method of [<code>DateTime</code>](#DateTime)  
+
+| Param | Type |
+| --- | --- |
+| targetDate | [<code>DateTime</code>](#DateTime) | 
+| config | [<code>DiffBusinessConfig</code>](#DiffBusinessConfig) | 
+
 <a name="getEasterMonthAndDay"></a>
 
 ## getEasterMonthAndDay(year) ⇒ <code>Array.&lt;number&gt;</code>
@@ -374,4 +394,15 @@ Returns the month and day of Easter for a given year.
 | Param | Type |
 | --- | --- |
 | year | <code>number</code> | 
+
+<a name="DiffBusinessConfig"></a>
+
+## DiffBusinessConfig
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| [includeEndDate] | <code>boolean</code> | <code>false</code> | include the end date in the calculation |
+| [relative] | <code>boolean</code> | <code>false</code> | signs the return value as negative if end date is in the past |
 
