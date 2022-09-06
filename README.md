@@ -19,6 +19,12 @@ Inspired by [moment-business-days](https://github.com/kalmecak/moment-business-d
 
 ## Install
 
+### Versions
+
+Package versions 3+ supports luxon 3+.
+
+For luxon ^1.X, check out [2.8.3](https://github.com/amaidah/luxon-business-days/tree/v2.8.3)
+
 ### Via NPM
 
 Already using luxon:

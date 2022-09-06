@@ -6,8 +6,8 @@ import { DEFAULT_BUSINESS_DAYS, DEFAULT_HOLIDAY_MATCHERS } from './defaults';
 beforeEach(() => {
   DateTime.prototype.clearBusinessSetup();
 
-  // moment.github.io/luxon/docs/manual/zones.html#changing-the-default-zone
-  https: Settings.defaultZoneName = 'local';
+  // https://github.com/moment/luxon/blob/master/docs/upgrading.md#2x-to-30
+  Settings.defaultZone = 'system';
 });
 
 describe('availableHolidayMatchers', () => {
@@ -296,15 +296,17 @@ describe('time zone is carried over after a business-day operation', () => {
   });
 
   it('overrides a defaultZone from Luxon Settings', () => {
-    Settings.defaultZoneName = 'America/Los_Angeles';
+    Settings.defaultZone = 'America/Los_Angeles';
 
-    const utc = DateTime.fromObject({
-      year: 2020,
-      month: 12,
-      day: 6,
-      zone: 'utc',
-    });
-    const utcPlusTen = utc.plusBusiness({ dats: 10 });
+    const utc = DateTime.fromObject(
+      {
+        year: 2020,
+        month: 12,
+        day: 6,
+      },
+      { zone: 'utc' }
+    );
+    const utcPlusTen = utc.plusBusiness({ days: 10 });
 
     expect(utc.zoneName === utcPlusTen.zoneName);
     expect(utc.offset === utcPlusTen.offset);
@@ -312,15 +314,58 @@ describe('time zone is carried over after a business-day operation', () => {
   });
 
   it('respects default zoning', () => {
-    // starts out local
-    expect(Settings.defaultZoneName).toBe(DateTime.local().zoneName);
+    // Luxon starts out as system zone by default but explicitly set here for readability
+    Settings.defaultZone = 'system';
 
-    Settings.defaultZoneName = 'America/New_York';
+    const defaultZone = DateTime.local();
+    const setAsDefaultZone = DateTime.local({ zone: 'default' });
+
+    expect(defaultZone.zoneName).toEqual(setAsDefaultZone.zoneName);
+
+    Settings.defaultZone = 'America/New_York';
 
     const ny = DateTime.local();
     const nyPlusTwo = ny.plusBusiness({ days: 2 });
 
     expect(ny.zoneName).toBe('America/New_York');
     expect(nyPlusTwo.zoneName).toBe('America/New_York');
+  });
+});
+
+describe('business days works through breakings changes on upgrading luxon to 3.X from 1.X', () => {
+  it('respects system vs default zones', () => {
+    Settings.defaultZone = 'America/Chicago';
+
+    expect(DateTime.local().zoneName).toEqual('America/Chicago');
+    expect(DateTime.local({ zone: 'default' }).zoneName).toEqual(
+      'America/Chicago'
+    );
+    expect(DateTime.local({ zone: 'system' }).zoneName).toEqual(
+      DateTime.local({ zone: 'local' }).zoneName
+    );
+  });
+
+  it('handles fromObject param changes', () => {
+    const chicagoTime = DateTime.fromObject(
+      { hour: 2 },
+      { zone: 'America/Chicago' }
+    );
+
+    const nextChicagoBizDay = chicagoTime.plusBusiness();
+
+    expect(chicagoTime.zoneName).toBe('America/Chicago');
+    expect(nextChicagoBizDay.zoneName).toBe('America/Chicago');
+  });
+
+  it('handles toLocaleString changes', () => {
+    let dt = DateTime.local(2020, 1, 1);
+    dt = dt.plusBusiness();
+
+    const koreanLocaleString = dt.toLocaleString(
+      { year: 'numeric', weekday: 'long', month: 'numeric', day: '2-digit' },
+      { locale: 'ko' }
+    );
+
+    expect(koreanLocaleString).toBe('2020. 1. 02. 목요일');
   });
 });
