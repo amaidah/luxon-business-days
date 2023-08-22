@@ -96,10 +96,12 @@ DateTime.prototype.isHoliday = function(...args) {
 /**
  * Checks if DateTime instance is a business day.
  * @augments DateTime
+ * @param {Array<number> | undefined} [businessDays=undefined | DEFAULT_BUSINESS_DAYS] - The working business days for the business.
  * @returns {boolean}
  */
-DateTime.prototype.isBusinessDay = function() {
-  const businessDays = this.businessDays || DEFAULT_BUSINESS_DAYS;
+DateTime.prototype.isBusinessDay = function(customBusinessDays) {
+  const businessDays =
+    customBusinessDays || this.businessDays || DEFAULT_BUSINESS_DAYS;
 
   return businessDays.includes(this.weekday);
 };
@@ -108,9 +110,13 @@ DateTime.prototype.isBusinessDay = function() {
  * Adds business days to an existing DateTime instance.
  * @augments DateTime
  * @param {number} [days=1] - The number of business days to add.
+ * @param {Array<number> | undefined} [customBusinessDays=undefined | DEFAULT_BUSINESS_DAYS] - The working business days for the business.
  * @returns {DateTime}
  */
-DateTime.prototype.plusBusiness = function({ days = ONE_DAY } = {}) {
+DateTime.prototype.plusBusiness = function({
+  days = ONE_DAY,
+  customBusinessDays,
+} = {}) {
   let dt = this;
 
   if (!dt.isValid) {
@@ -128,7 +134,7 @@ DateTime.prototype.plusBusiness = function({ days = ONE_DAY } = {}) {
 
     dt = dt.plus({ days: oneDayByDirection });
 
-    if (dt.isBusinessDay() && !dt.isHoliday()) {
+    if (dt.isBusinessDay(customBusinessDays) && !dt.isHoliday()) {
       businessDaysLeftToAdd--;
     }
   }
@@ -140,10 +146,14 @@ DateTime.prototype.plusBusiness = function({ days = ONE_DAY } = {}) {
  * Subtracts business days to an existing DateTime instance.
  * @augments DateTime
  * @param {number} [days=1] - The number of business days to subtract.
+ * @param {Array<number> | undefined} [customBusinessDays=undefined | DEFAULT_BUSINESS_DAYS] - The working business days for the business.
  * @returns {DateTime}
  */
-DateTime.prototype.minusBusiness = function({ days = ONE_DAY } = {}) {
-  return this.plusBusiness({ days: -days });
+DateTime.prototype.minusBusiness = function({
+  days = ONE_DAY,
+  customBusinessDays,
+} = {}) {
+  return this.plusBusiness({ days: -days, customBusinessDays });
 };
 
 export { DateTime };
