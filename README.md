@@ -269,8 +269,8 @@ dt.isHoliday('middle-america', {some: 'stuff'});
     * [.clearBusinessSetup()](#DateTime+clearBusinessSetup) ⇐ [<code>DateTime</code>](#DateTime)
     * [.isHoliday([...args])](#DateTime+isHoliday) ⇒ <code>boolean</code>
     * [.isBusinessDay([businessDays])](#DateTime+isBusinessDay) ⇒ <code>boolean</code>
-    * [.plusBusiness([days], [businessDays])](#DateTime+plusBusiness) ⇒ [<code>DateTime</code>](#DateTime)
-    * [.minusBusiness([days], [businessDays])](#DateTime+minusBusiness) ⇒ [<code>DateTime</code>](#DateTime)
+    * [.plusBusiness([days], [customBusinessDays])](#DateTime+plusBusiness) ⇒ [<code>DateTime</code>](#DateTime)
+    * [.minusBusiness([days], [customBusinessDays])](#DateTime+minusBusiness) ⇒ [<code>DateTime</code>](#DateTime)
 
 <a name="DateTime+availableHolidayMatchers"></a>
 
@@ -352,7 +352,7 @@ Checks if DateTime instance is a business day.
 
 <a name="DateTime+plusBusiness"></a>
 
-### dateTime.plusBusiness([days], [businessDays]) ⇒ [<code>DateTime</code>](#DateTime)
+### dateTime.plusBusiness([days], [customBusinessDays]) ⇒ [<code>DateTime</code>](#DateTime)
 Adds business days to an existing DateTime instance.
 
 **Kind**: instance method of [<code>DateTime</code>](#DateTime)  
@@ -361,11 +361,11 @@ Adds business days to an existing DateTime instance.
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | [days] | <code>number</code> | <code>1</code> | The number of business days to add. |
-| [businessDays] | <code>Array.&lt;number&gt;</code> \| <code>undefined</code> | <code>undefined | DEFAULT_BUSINESS_DAYS</code> | The working business days for the business. |
+| [customBusinessDays] | <code>Array.&lt;number&gt;</code> \| <code>undefined</code> | <code>undefined | DEFAULT_BUSINESS_DAYS</code> | The working business days for the business. |
 
 <a name="DateTime+minusBusiness"></a>
 
-### dateTime.minusBusiness([days], [businessDays]) ⇒ [<code>DateTime</code>](#DateTime)
+### dateTime.minusBusiness([days], [customBusinessDays]) ⇒ [<code>DateTime</code>](#DateTime)
 Subtracts business days to an existing DateTime instance.
 
 **Kind**: instance method of [<code>DateTime</code>](#DateTime)  
@@ -374,7 +374,7 @@ Subtracts business days to an existing DateTime instance.
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | [days] | <code>number</code> | <code>1</code> | The number of business days to subtract. |
-| [businessDays] | <code>Array.&lt;number&gt;</code> \| <code>undefined</code> | <code>undefined | DEFAULT_BUSINESS_DAYS</code> | The working business days for the business. |
+| [customBusinessDays] | <code>Array.&lt;number&gt;</code> \| <code>undefined</code> | <code>undefined | DEFAULT_BUSINESS_DAYS</code> | The working business days for the business. |
 
 <a name="getEasterMonthAndDay"></a>
 
