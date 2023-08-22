@@ -153,7 +153,7 @@ describe('isBusinessDay()', () => {
     });
   });
 
-  it('knows when overridden business settings are business days', () => {
+  it('knows when overridden global business settings are business days', () => {
     const monday = [2019, 8, 26];
     let dt = DateTime.local(...monday);
     dt.setupBusiness({ businessDays: [2, 4, 7] });
@@ -170,6 +170,29 @@ describe('isBusinessDay()', () => {
 
     Object.values(days).forEach(({ isBusinessDay }) => {
       expect(dt.isBusinessDay()).toEqual(isBusinessDay);
+
+      dt = dt.plus({ days: 1 });
+    });
+  });
+
+  it('knows when custom business days are passed', () => {
+    const monday = [2019, 8, 26];
+    let dt = DateTime.local(...monday);
+    const customBusinessDays = [1, 2, 4, 7];
+    dt.setupBusiness({ businessDays: customBusinessDays });
+
+    const days = {
+      monday: { isBusinessDay: true },
+      tuesday: { isBusinessDay: true },
+      wednesday: { isBusinessDay: false },
+      thursday: { isBusinessDay: true },
+      friday: { isBusinessDay: false },
+      saturday: { isBusinessDay: false },
+      sunday: { isBusinessDay: true },
+    };
+
+    Object.values(days).forEach(({ isBusinessDay }) => {
+      expect(dt.isBusinessDay(customBusinessDays)).toEqual(isBusinessDay);
 
       dt = dt.plus({ days: 1 });
     });
@@ -233,7 +256,24 @@ describe('plusBusiness()', () => {
     expect(+wednesdayPlusBusinessDays === +friday).toBe(true);
   });
 
-  it('knows how add a negative number of days (aka add days)', () => {
+  it('knows how to add business days when custom business days are passed', () => {
+    const dt = DateTime.local(2019, 7, 3);
+    const customBusinessDays = [1, 2, 3, 4, 6]; // Saturday is a business day, but Friday is not.
+    const saturday = DateTime.local(2019, 7, 6);
+    const myCompanyTakesNoHolidays = [];
+    dt.setupBusiness({
+      holidayMatchers: myCompanyTakesNoHolidays,
+    });
+    const wednesdayPlusBusinessDays = dt.plusBusiness({
+      days: 2,
+      customBusinessDays,
+    });
+    console.log(wednesdayPlusBusinessDays.toJSDate());
+
+    expect(+wednesdayPlusBusinessDays === +saturday).toBe(true);
+  });
+
+  it('knows how add a negative number of days (aka subtract days)', () => {
     const wednesday = DateTime.local(2019, 7, 3);
     const tuesday = DateTime.local(2019, 7, 2);
     const dayBeforeWednesday = wednesday.plusBusiness({ days: -1 });
@@ -265,6 +305,18 @@ describe('minusBusiness()', () => {
     const tuesdayMinusBusinessDays = tuesday.minusBusiness({ days: 3 });
 
     expect(+tuesdayMinusBusinessDays === +previousThursday).toBe(true);
+  });
+
+  it('knows how to subtract business days when custom business days are passed', () => {
+    const tuesday = DateTime.local(2019, 8, 27);
+    const previousFriday = DateTime.local(2019, 8, 22);
+    const customBusinessDays = [1, 2, 3, 4, 6]; // Saturday is a business day, but Friday is not.
+    const tuesdayMinusBusinessDays = tuesday.minusBusiness({
+      days: 3,
+      customBusinessDays,
+    });
+
+    expect(+tuesdayMinusBusinessDays === +previousFriday).toBe(true);
   });
 
   it('knows how to subtract negative business days (aka add days)', () => {
